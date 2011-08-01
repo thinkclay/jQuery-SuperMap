@@ -1,0 +1,108 @@
+body { font-family:Arial, Helvetica, sans-serif; background:#F1F1F1; }
+a { color:#fff; }
+
+#content { width:960px; margin:0 auto; }
+
+/** SuperMap Styles **/
+.loader { background:url(../img/loader.gif) no-repeat center #fff; }
+
+.imgCaption {
+	top:0;
+	left:0;
+	color:#fff;
+	opacity:.6;
+	background:#333;
+	padding:10px;
+	width:940px;
+	text-align:center;
+	font-size:16px;
+	text-transform:uppercase;
+	text-shadow:1px 1px 0 #111;
+	font-weight:bold;
+}
+
+.bubble .close {
+	display:block;
+	text-indent:-9999px;
+	position:absolute;
+	top: 4px;
+	right: 4px;
+	width:18px;
+	height:18px;
+	outline:none;
+	background:url(../img/close.png) no-repeat;
+	cursor:pointer;
+}
+
+.mapNav { height: 72px; width: 74px; }
+
+	.navBtn {
+		position: absolute;
+		background-repeat: no-repeat;
+		width: 24px;
+		height: 24px;
+		outline: none;
+		text-indent: -9999px;
+		display: block;
+		z-index: 7;
+	}
+
+.navBtn0 { top: 0; left:26px; background-image:url(../img/navtop.png); }
+.navBtn1 { top: 24px; right:0; background-image:url(../img/navright.png); }
+.navBtn2 { bottom:0; left:26px; background-image:url(../img/navbottom.png); }
+.navBtn3 { top:24px; left:0; background-image:url(../img/navleft.png); }
+
+/* ------ example1
+-----------------------------------------------*/
+
+.map { margin:10px 0; width:960px; height:500px; }
+
+.point { 
+	display:block;
+	text-indent:-9999px;
+	width:32px;
+	height:44px;
+	outline:none;
+	background:url(../img/marker.png) no-repeat;
+	cursor:pointer;
+}
+
+.bubble {
+	padding:7px 10px;
+	background:#333;
+	color:#fff;
+	width:240px;
+	font-size:11px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+
+	.bubble p { margin:5px 0; }
+	.bubble span { display:block; font-size:12px; font-weight:bold; }
+	.bubble img { vertical-align:bottom; }
+
+
+ul.map_buttons, ul.map_buttons li { display:block; list-style:none; padding:0; margin:0; }
+	ul.map_buttons li { float:left; }
+		.map_buttons a {
+			-moz-border-radius:8px;
+			-webkit-border-radius:8px;
+			border-radius:8px;
+			background:#aaa;
+			color:#fff;
+			display:block;
+			float:left;
+			font-size:11px;
+			line-height:28px;
+			margin-right:4px;
+			outline:none;
+			padding:0 15px;
+			text-decoration:none;
+		}
+		.map_buttons a:hover { background:#111; color:#fff; }
+		
+
+.activity { background: url('../img/map/sprite-activity.png') no-repeat; height: 150px; width: 226px; }
+.activity#climbing-wall { background-position: 0 0; }
+.activity#climbing-wall:hover { background-position: 0 -200px; }
