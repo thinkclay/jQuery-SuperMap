@@ -171,7 +171,9 @@
 		                	zIndex: 	'2', 
 		                	top: 		y+'px', 
 		                	left: 		x+'px'
-		                });
+		                }).width( Math.round($this.width() / ratioWidth) );
+		                
+		                $this.children('img').width( $this.width() );
 		            });
                 },
                 
@@ -295,19 +297,21 @@
 		                var $this = $(this),
 		                	x = $this.position().left, 
 		                	y = $this.position().top;
-							
-						if ( direction == 'out' ) {
-							$this.width( Math.round($this.width() / ratioWidth) );
-							$this.children('img').width( $this.width() );
-							//y = Math.round(y / ratioHeight);
-							//x = Math.round(x / ratioWidth);
-						}
 						
 						if ( direction == 'in' ) {
+							y = Math.round(y * ratioHeight);
+							x = Math.round(x * ratioWidth);
+							
 							$this.width( Math.round($this.width() * ratioWidth) );
-							$this.children('img').width( $this.width() );
-							//y = Math.round(y * ratioHeight);
-							//x = Math.round(x * ratioWidth);
+							$this.children('img').width( $this.parent().width() );
+						}
+							
+						if ( direction == 'out' ) {
+							y = Math.round(y / ratioHeight);
+							x = Math.round(x / ratioWidth);
+							
+							$this.width( Math.round($this.width() / ratioWidth) );
+							$this.children('img').width( $this.parent().width() );
 						}
 							
 		                $this.css({ position: 'absolute', zIndex: '2', top: y+'px', left: x+'px' });
@@ -316,44 +320,39 @@
 				
 				zoom: function ( direction, w, init ) {
 					map_width = $('#map-bg').width();
-	
                 	max = (zoom >= sets.zoom.max && direction == 'in' );
                 	min = (zoom <= sets.zoom.min && direction == 'out');
                 	
-                	if ( min || max ) {
-                		console.log('max or min zoom reached');
+                	if ( min || max )
                 		return false;
-                	}
-										                	
-					if ( direction == 'in' ) {
-						zoom += sets.zoom.increment;
-						console.log('in, cur: '+zoom+' inc: '+sets.zoom.increment);
-						$('#map-bg').width( (map_width += (map_width * sets.zoom.increment)) );		
-						$('#map-bg').height( map_width * y_ratio );
-					}
 					
-					if ( direction == 'out' ) {
-						zoom -= sets.zoom.increment;
-						console.log('out: '+zoom);
-						$('#map-bg').width( (map_width -= (map_width * sets.zoom.increment)) );
-						$('#map-bg').height( map_width * y_ratio );
-					}	
-					
-					if ( w != null ) {
-						console.log('width: '+w);
+					if ( w != '' || typeof w != 'undefined' ) {
 						if ( w < $('#map-bg').width() )	direction = 'out';
 						if ( w > $('#map-bg').width() ) direction = 'in';
 					
 						$('#map-bg').width( w );
 						$('#map-bg').height( w * y_ratio );
 					}
+									                	
+					if ( direction == 'in' ) {
+						zoom += sets.zoom.increment;
+						
+						$('#map-bg').width( map_width += (map_width * sets.zoom.increment) );		
+						$('#map-bg').height( map_width * y_ratio );
+					}
+					
+					if ( direction == 'out' ) {
+						zoom -= sets.zoom.increment;
+						
+						$('#map-bg').width( map_width -= (map_width * sets.zoom.increment) );
+						$('#map-bg').height( map_width * y_ratio );
+					}	
 					
 					ratioWidth = imgw / $('#map-bg').width();
 					ratioHeight = imgh / $('#map-bg').height();
 					
-					if ( ! init || typeof init == 'undefined' )	map.plot(direction);
-					
-					return zoom;
+					if ( ! init || typeof init == 'undefined' )	
+						map.plot(direction);					
 				}
 				
             }; // end: map
