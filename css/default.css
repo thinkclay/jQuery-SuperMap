@@ -21,19 +21,6 @@ a { color:#fff; }
 	font-weight: bold;
 }
 
-.bubble .close {
-	display: block;
-	text-indent: -9999px;
-	position: absolute;
-	top: 4px;
-	right: 4px;
-	width: 18px;
-	height: 18px;
-	outline: none;
-	background: url('../img/map/close.png') no-repeat;
-	cursor: pointer;
-}
-
 .mapNav { height: 72px; width: 74px; }
 
 	.map-move {
@@ -93,19 +80,29 @@ a { color:#fff; }
 		.slide .close strong { color: #d49604; float: left; }
 				
 .bubble {
-	padding:7px 10px;
-	background:#333;
-	color:#fff;
-	width:240px;
-	font-size:11px;
+	background: #333;
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
 	border-radius:10px;
+	color: #fff;
+	padding: 15px;
+	width: 300px;
 }
+	.bubble .close {
+		display: block;
+		text-indent: -9999px;
+		position: absolute;
+		top: -10px;
+		right: -10px;
+		width: 30px;
+		height: 30px;
+		outline: none;
+		background: url('../img/map/close.png') no-repeat;
+		cursor: pointer;
+	}
 
-	.bubble p { margin:5px 0; }
+	.bubble p { font-size: 10px; line-height: 1.6em; margin: 5px 0; }
 	.bubble span { display:block; font-size:12px; font-weight:bold; }
-	.bubble img { vertical-align:bottom; }
 
 
 ul.map_buttons, ul.map_buttons li { display:block; list-style:none; padding:0; margin:0; }
