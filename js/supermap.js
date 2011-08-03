@@ -46,7 +46,7 @@
                 x_ratio = $('#map-bg').width() / $('#map-bg').height(),
 				y_ratio = $('#map-bg').height() / $('#map-bg').width(),
 				zoom = sets.zoom.start;
-                
+              
             var cookies = {
                 create: function (name, value, days) {
                     if (days) {
@@ -76,7 +76,7 @@
                     }
                     return null
                 }
-            }; // end: cookies
+            }
             
             var map = {
                 check: function (x, y) {
@@ -137,7 +137,7 @@
 	                        else {
 	                            if (x > 0) x = 0
 	                        }
-                    } // end: switch
+                    }
                     
                     if (sets.cookies) {
                         if (cookies.read('position') != null) {
@@ -152,29 +152,6 @@
                     }
                     
                     content.css({ top: y+'px', left: x+'px' });
-                    
-                    point.each( function () 
-		            {
-		                var $this = $(this),
-		                    pos = $this.attr("rel").split("-");
-		                	x = pos[1], y = pos[2];
-		                	
-		                $this.wrapInner($('<div />').addClass('markerContent').css({ display: 'none' }));
-		                
-		                if ($this.attr('data-type')	== 'image') {
-		                	prepend = '<img src="/img/map/'+$this.attr('data-prefix')+$this.attr('id')+'.png" alt="'+$this.attr('id')+'" />';
-		                	$this.prepend(prepend);
-		                }
-		                
-		                $this.css({ 
-		                	position:	'absolute', 
-		                	zIndex: 	'2', 
-		                	top: 		y+'px', 
-		                	left: 		x+'px'
-		                }).width( Math.round($this.width() / ratioWidth) );
-		                
-		                $this.children('img').width( $this.width() );
-		            });
                 },
                 
                 preloader: function () {
@@ -292,33 +269,56 @@
                     }
                 },
                 
-				plot: function (direction) {
+				plot: function (direction, start) {
 					point.each( function () {
-		                var $this = $(this),
+		                var $this = $(this);
+		                
+		                console.log('Ratio: '+ratioWidth+','+ratioHeight);
+		                
+		                if ( start === true ) {
+		                	pos = $this.attr("rel").split("-");
+		                	x = (pos[1] * ratioWidth), y = (pos[2] * ratioHeight);
+		                	
+		                	$this.wrapInner($('<div />').addClass('markerContent').css({ display: 'none' }));
+		                
+			                if ($this.attr('data-type')	== 'image') {
+			                	prepend = '<img src="/img/map/'+$this.attr('data-prefix')+$this.attr('id')+'.png" alt="'+$this.attr('id')+'" />';
+			                	$this.prepend(prepend);
+			                }
+			                
+			                $this.width( Math.round($this.width() / ratioWidth) );
+			                $this.children('img').width( $this.width() );
+		                }
+		                else {
 		                	x = $this.position().left, 
 		                	y = $this.position().top;
-						
-						if ( direction == 'in' ) {
-							y = Math.round(y * ratioHeight);
-							x = Math.round(x * ratioWidth);
+		                
+							console.log(x+', '+y);
 							
-							$this.width( Math.round($this.width() * ratioWidth) );
-							$this.children('img').width( $this.parent().width() );
-						}
+							if ( direction == 'in' ) {
+								y = Math.round(y * ratioHeight);
+								x = Math.round(x * ratioWidth);
+								
+								$this.width( Math.round($this.width() * ratioWidth) );
+								$this.children('img').width( $this.parent().width() );
+							}
+								
+							if ( direction == 'out' ) {
+								y = Math.round(y / ratioHeight);
+								x = Math.round(x / ratioWidth);
+								
+								$this.width( Math.round($this.width() / ratioWidth) );
+								$this.children('img').width( $this.parent().width() );
+							}
 							
-						if ( direction == 'out' ) {
-							y = Math.round(y / ratioHeight);
-							x = Math.round(x / ratioWidth);
-							
-							$this.width( Math.round($this.width() / ratioWidth) );
-							$this.children('img').width( $this.parent().width() );
+							console.log(x+', '+y);
 						}
 							
 		                $this.css({ position: 'absolute', zIndex: '2', top: y+'px', left: x+'px' });
 		            });
 				},
 				
-				zoom: function ( direction, w, init ) {
+				zoom: function ( direction, w, start ) {
 					map_width = $('#map-bg').width();
                 	max = (zoom >= sets.zoom.max && direction == 'in' );
                 	min = (zoom <= sets.zoom.min && direction == 'out');
@@ -326,19 +326,11 @@
                 	if ( min || max )
                 		return false;
 					
-					if ( w != '' || typeof w != 'undefined' ) {
-						if ( w < $('#map-bg').width() )	direction = 'out';
-						if ( w > $('#map-bg').width() ) direction = 'in';
-					
-						$('#map-bg').width( w );
-						$('#map-bg').height( w * y_ratio );
-					}
-									                	
 					if ( direction == 'in' ) {
 						zoom += sets.zoom.increment;
 						
-						$('#map-bg').width( map_width += (map_width * sets.zoom.increment) );		
-						$('#map-bg').height( map_width * y_ratio );
+						$('#map-bg').width( Math.round(map_width += (map_width * sets.zoom.increment)) );		
+						$('#map-bg').height( Math.round(map_width * y_ratio) );
 					}
 					
 					if ( direction == 'out' ) {
@@ -348,11 +340,19 @@
 						$('#map-bg').height( map_width * y_ratio );
 					}	
 					
+					if ( w != '' && typeof w != 'undefined' ) {
+						if ( w < $('#map-bg').width() )	direction = 'out';
+							
+						if ( w > $('#map-bg').width() )	direction = 'in';
+					
+						$('#map-bg').width( Math.round(w) );
+						$('#map-bg').height( Math.round(w * y_ratio) );
+					}
+					
 					ratioWidth = imgw / $('#map-bg').width();
 					ratioHeight = imgh / $('#map-bg').height();
 					
-					if ( ! init || typeof init == 'undefined' )	
-						map.plot(direction);					
+					map.plot(direction, start);					
 				}
 				
             }; // end: map

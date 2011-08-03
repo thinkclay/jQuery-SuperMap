@@ -1,6 +1,6 @@
 $(function(){
 	$('.map').supermap({
-		zoom:			{ start: .5, increment: .1, max: 1, min: .5 },
+		zoom:			{ start: .5, increment: .1, max: 1, min: .1 },
 		position: 		'center',
 		popupClass: 	'slide',	// I created styles for 'bubble' and 'slide' here
 		markerClass: 	'point',
