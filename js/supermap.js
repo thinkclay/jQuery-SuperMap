@@ -80,11 +80,17 @@
             
             var map = {
                 check: function (x, y) {
-                    if (y < (divh - imgh))	y = divh - imgh
-                    else if (y > 0)	y = 0
+                    if ( y < (divh - $('#map-bg').height()) )	
+                    	y = divh - $('#map-bg').height();
                     
-                    if (x < (divw - imgw))	x = divw - imgw
-                    else if (x > 0)	x = 0
+                    else if (y > 0)	
+                    	y = 0;
+                    
+                    if ( x < (divw - $('#map-bg').width()) )	
+                    	x = divw - $('#map-bg').width();
+                    
+                    else if (x > 0)	
+                    	x = 0;
                     
                     return { x: x, y: y }
                 },
@@ -208,7 +214,7 @@
                         check = map.check(left, top);
                     
                     content.css({ top: check.y+'px', left: check.x+'px' });
-
+					
                     if (sets.cookies)
                         cookies.create('position', check.x + ',' + check.y, 7)
                 },
@@ -269,55 +275,6 @@
                     }
                 },
                 
-				plot: function (direction, start) {
-					point.each( function () {
-		                var $this = $(this);
-		                
-		                console.log('Ratio: '+ratioWidth+','+ratioHeight);
-		                
-		                if ( start === true ) {
-		                	pos = $this.attr("rel").split("-");
-		                	x = (pos[1] * ratioWidth), y = (pos[2] * ratioHeight);
-		                	
-		                	$this.wrapInner($('<div />').addClass('markerContent').css({ display: 'none' }));
-		                
-			                if ($this.attr('data-type')	== 'image') {
-			                	prepend = '<img src="/img/map/'+$this.attr('data-prefix')+$this.attr('id')+'.png" alt="'+$this.attr('id')+'" />';
-			                	$this.prepend(prepend);
-			                }
-			                
-			                $this.width( Math.round($this.width() / ratioWidth) );
-			                $this.children('img').width( $this.width() );
-		                }
-		                else {
-		                	x = $this.position().left, 
-		                	y = $this.position().top;
-		                
-							console.log(x+', '+y);
-							
-							if ( direction == 'in' ) {
-								y = Math.round(y * ratioHeight);
-								x = Math.round(x * ratioWidth);
-								
-								$this.width( Math.round($this.width() * ratioWidth) );
-								$this.children('img').width( $this.parent().width() );
-							}
-								
-							if ( direction == 'out' ) {
-								y = Math.round(y / ratioHeight);
-								x = Math.round(x / ratioWidth);
-								
-								$this.width( Math.round($this.width() / ratioWidth) );
-								$this.children('img').width( $this.parent().width() );
-							}
-							
-							console.log(x+', '+y);
-						}
-							
-		                $this.css({ position: 'absolute', zIndex: '2', top: y+'px', left: x+'px' });
-		            });
-				},
-				
 				zoom: function ( direction, w, start ) {
 					map_width = $('#map-bg').width();
                 	max = (zoom >= sets.zoom.max && direction == 'in' );
@@ -353,6 +310,51 @@
 					ratioHeight = imgh / $('#map-bg').height();
 					
 					map.plot(direction, start);					
+				},
+				
+				plot: function (direction, start) {
+					point.each( function () {
+		                var $this = $(this);
+		                
+		                if ( start === true ) {
+		                	pos = $this.attr("rel").split("-");
+		                	x = (pos[1] * ratioWidth), y = (pos[2] * ratioHeight);
+		                	
+		                	$this.wrapInner($('<div />').addClass('markerContent').css({ display: 'none' }));
+		                
+			                if ($this.attr('data-type')	== 'image') {
+			                	prepend = '<img src="/img/map/'+$this.attr('data-prefix')+$this.attr('id')+'.png" alt="'+$this.attr('id')+'" />';
+			                	$this.prepend(prepend);
+			                }
+			                
+			                $this.width( Math.round($this.width() / ratioWidth) );
+			                $this.children('img').width( $this.width() );
+		                }
+		                else {
+		                	x = $this.position().left, 
+		                	y = $this.position().top;
+							
+							console.log(ratioWidth+', '+ratioHeight);
+							
+							if ( direction == 'in' ) {
+								y = Math.round(y * ratioHeight);
+								x = Math.round(x * ratioWidth);
+								
+								$this.width( Math.round($this.width() * ratioWidth * zoom) );
+								$this.children('img').width( $this.width() );
+							}
+								
+							if ( direction == 'out' ) {
+								y = Math.round(y / ratioHeight);
+								x = Math.round(x / ratioWidth);
+								
+								$this.width( Math.round($this.width() / ratioWidth / zoom) );
+								$this.children('img').width( $this.width() );
+							}
+						}
+							
+		                $this.css({ position: 'absolute', zIndex: '2', top: y+'px', left: x+'px' });
+		            });
 				}
 				
             }; // end: map
@@ -363,8 +365,7 @@
             }
             
             content.bind({
-                mousedown: function (e) 
-                {
+                mousedown: function (e) {
                     e.preventDefault();
                     mouseDown = true;
                     var mouse = map.mouse(e);
