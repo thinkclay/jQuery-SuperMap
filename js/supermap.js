@@ -4,6 +4,12 @@
  * @author 		Clay McIlrath
  * @license		http://www.opensource.org/licenses/mit-license.php
  */
+
+/**
+ * Special thanks to:
+ * Zack Perdue (http://ziggidycreative.com) for having great connections and helping me test 
+ * Patrick Teen (http://weblance.com.au) for solving math issues that I was too stupid to figure out
+ */
 (function ($) {
     $.fn.supermap = function (options) 
     {
@@ -280,6 +286,10 @@
                 	max = (zoom >= sets.zoom.max && direction == 'in' );
                 	min = (zoom <= sets.zoom.min && direction == 'out');
                 	
+					var currW = $('#map-bg').width();
+					var currH = $('#map-bg').height();
+
+					
                 	if ( min || max )
                 		return false;
 					
@@ -306,8 +316,9 @@
 						$('#map-bg').height( Math.round(w * y_ratio) );
 					}
 					
-					ratioWidth = imgw / $('#map-bg').width();
-					ratioHeight = imgh / $('#map-bg').height();
+					ratioWidth = currW / $('#map-bg').width();
+					ratioHeight = currH / $('#map-bg').height();
+
 					
 					map.plot(direction, start);					
 				},
@@ -334,23 +345,27 @@
 		                	x = $this.position().left, 
 		                	y = $this.position().top;
 							
-							console.log(ratioWidth+', '+ratioHeight);
+							//console.log(ratioWidth+', '+ratioHeight);
 							
 							if ( direction == 'in' ) {
-								y = Math.round(y * ratioHeight);
-								x = Math.round(x * ratioWidth);
-								
-								$this.width( Math.round($this.width() * ratioWidth * zoom) );
-								$this.children('img').width( $this.width() );
+								y = Math.round(y / ratioHeight);
+								x = Math.round(x / ratioWidth);
+															
+								$this.width( Math.round($this.width() / ratioWidth) );
+								$this.height( Math.round($this.height() / ratioHeight) );
+								$this.children('img').width( $this.width() );							
 							}
-								
+															
 							if ( direction == 'out' ) {
 								y = Math.round(y / ratioHeight);
 								x = Math.round(x / ratioWidth);
-								
-								$this.width( Math.round($this.width() / ratioWidth / zoom) );
+															
+								$this.width( Math.round($this.width() / ratioWidth) );
+								$this.height( Math.round($this.height() / ratioHeight) );
 								$this.children('img').width( $this.width() );
+															
 							}
+
 						}
 							
 		                $this.css({ position: 'absolute', zIndex: '2', top: y+'px', left: x+'px' });
