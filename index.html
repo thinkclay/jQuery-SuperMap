@@ -15,6 +15,15 @@
 		<div class="map">
 			<img id="map-bg" src="map.jpg" alt="Map Title" width="2000" height="1200" />
 
+			<!-- 
+			class: 			point & activity are required for each of them
+			id:				unique ID that can be used from nav elements
+			rel:			starting coordinate for the activity (point-left-top)
+			data-type:		built this for future flexibilty of specifying points as a marker or image
+			data-prefix:	i figured we'd want all map point images to have similar names, so I created a prefix
+			
+			e.g.:			'/img/map/' + data-prefix + id + '.png' = /img/map/activity-climbing-wall.png
+			-->
 			<div class="point activity" id="climbing-wall" rel="p-58-46" data-type="image" data-prefix="activity-">
 				<span>Climbing Wall</span>
 				<p>I want this first point to be 202px wide, 168px from the top and 209px from the left</p>
