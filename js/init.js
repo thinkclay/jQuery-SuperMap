@@ -5,7 +5,7 @@ $(function(){
 		popupClass: 	'slide',	// I created styles for 'bubble' and 'slide' here
 		markerClass: 	'point',
 		popup: 			'slide',	// bubble or slide
-		cookies: 		true,
+		cookies: 		false,
 		caption: 		false,
 		setCenter: 		true,
 		navigation: 	true,

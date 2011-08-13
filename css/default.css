@@ -140,4 +140,54 @@ ul.map_buttons, ul.map_buttons li { display:block; list-style:none; padding:0; m
 		
 .activity { background: none; opacity: 0; }
 .activity:hover, .activity.selected { opacity: .4; }
-.activity#climbing-wall { height: 150px; width: 226px; }
+
+.activity#main-office {width:240px; height:150px;}
+.activity#health-center {width:124px; height:71px;}
+.activity#gate-house {width:49px; height:58px;}
+.activity#mini-golf {width:200px; height:142px;}
+.activity#big-top {width:279px; height:192px;}
+.activity#tennis {width:328px; height:314px;}
+.activity#playport {width:85px; height:88px;}
+.activity#mega-mesa {width:122px; height:171px;}
+.activity#railroad {width:88px; height:95px;}
+.activity#field-dreams {width:468px; height:489px;}
+.activity#coleman-yards {width:149px; height:90px;}
+.activity#crafts {width:155px; height:85px;}
+.activity#petting-zoo {width:82px; height:62px;}
+.activity#picnic-grove {width:218px; height:138px;}
+.activity#playground {width:100px; height:98px;}
+.activity#dining-room {width:218px; height:138px;}
+.activity#gymnastics {width:218px; height:138px;}
+.activity#theater {width:218px; height:138px;}
+.activity#sports-deck {width:218px; height:138px;}
+.activity#woodworking {width:47px; height:37px;}
+.activity#cabins {width:151px; height:183px;}
+.activity#pioneer-station {width:146px; height:172px;}
+.activity#cooking {width:143px; height:391px;}
+.activity#dance-hall {width:218px; height:138px;}
+.activity#soccer-fields {width:336px; height:265px;}
+.activity#schoolhouse {width:61px; height:90px;}
+.activity#computers {width:68px; height:112px;}
+.activity#bus-yard {width:256px; height:286px;}
+.activity#hockey {width:121px; height:135px;}
+.activity#street-games {width:145px; height:103px;}
+.activity#grand-playhouse {width:218px; height:138px;}
+.activity#challenge-course {width:218px; height:138px;}
+.activity#martial-arts {width:218px; height:138px;}
+.activity#trails {width:1121px; height:550px;}
+.activity#horseback-riding {width:173px; height:387px;}
+.activity#storytelling {width:43px; height:51px;}
+.activity#boating {width:246px; height:205px;}
+.activity#zipline {width:358px; height:173px;}
+.activity#archery {width:195px; height:131px;}
+.activity#music {width:171px; height:143px;}
+.activity#gaga-complex {width:218px; height:138px;}
+.activity#water-park {width:218px; height:138px;}
+.activity#ping-pong {width:98px; height:45px;}
+.activity#yoga {width:165px; height:93px;}
+.activity#junior-soccer {width:156px; height:97px;}
+.activity#pool-locker-rooms {width:434px; height:162px;}
+.activity#pools {width:284px; height:209px;}
+.activity#basketball {width:554px; height:209px;}
+.activity#volleyball {width:122px; height:102px;}
+.activity#water-misters {width:28px; height:38px;}

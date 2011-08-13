@@ -334,18 +334,16 @@
 		                	$this.wrapInner($('<div />').addClass('markerContent').css({ display: 'none' }));
 		                
 			                if ($this.attr('data-type')	== 'image') {
-			                	prepend = '<img src="/img/map/'+$this.attr('data-prefix')+$this.attr('id')+'.png" alt="'+$this.attr('id')+'" />';
+			                	prepend = '<img src="img/map/'+$this.attr('data-prefix')+$this.attr('id')+'.png" alt="'+$this.attr('id')+'" />';
 			                	$this.prepend(prepend);
 			                }
 			                
-			                $this.width( Math.round($this.width() / ratioWidth) );
+			                $this.height( Math.round($this.height() / ratioHeight) ).width( Math.round($this.width() / ratioWidth) );
 			                $this.children('img').width( $this.width() );
 		                }
 		                else {
 		                	x = $this.position().left, 
 		                	y = $this.position().top;
-							
-							//console.log(ratioWidth+', '+ratioHeight);
 							
 							if ( direction == 'in' ) {
 								y = Math.round(y / ratioHeight);
