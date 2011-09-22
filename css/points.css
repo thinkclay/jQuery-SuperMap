@@ -1,0 +1,86 @@
+#main-office {width:240px; height:150px;}
+#health-center {width:124px; height:71px;}
+    #health-center .bubble {top:30%; left:0;}
+#gate-house {width:49px; height:58px;}
+#mini-golf {width:200px; height:142px;}
+	#mini-golf .bubble {top:20px; left:0px;}
+#big-top {width:279px; height:192px;}
+	#big-top .bubble {left:50%;}
+#tennis {width:278px; height:189px;}
+    #tennis .bubble {left:20%; top:80%}
+#tennis2 {width:76px; height:61px;}
+#playport {width:85px; height:88px;}
+	#playport .bubble {top:-10%; left:-60%;}
+#mega-mesa {width:122px; height:171px;}
+    #mega-mesa .bubble {top:10%; left:-10%;}
+#railroad {width:88px; height:95px;}
+	#railroad .bubble {top:0; left:-50%;}
+#field-dreams {width:468px; height:489px;}
+	#field-dreams .bubble {left:130px;}
+#coleman-yards {width:149px; height:90px;}
+    #coleman-yards .bubble {top:40%;}
+#crafts {width:155px; height:85px;}
+#petting-zoo {width:82px; height:62px;}
+	#petting-zoo .bubble {top:0; left:0;}
+#pavilion {width:133px; height:149px;}
+#picnic-grove {width:133px; height:149px;}
+#theater {width:133px; height:149px;}
+#sports-deck {width:133px; height:149px;}
+    #pavilion .bubble, #picnic-grove .bubble, #theater .bubble, #sports-deck .bubble {left:10%; top:30%;}
+#playground {width:100px; height:98px;}
+    #playground .bubble {top:15%;}
+#dining-gym {width:220px; height:218px;}
+#dining-room {width:220px; height:218px;}
+#gymnastics {width:220px; height:218px;}
+    #dining-gym .bubble, #dining-room .bubble, #gymnastics .bubble {left:10%; top:20%;}
+#woodworking {width:47px; height:37px;}
+#cabins {width:151px; height:183px;}
+#pioneer-station {width:146px; height:172px;}
+    #pioneer-station .bubble {left:-80%; top:50%;}
+#cooking { height: 55px; width: 50px; }
+#dance-hall {width:218px; height:138px;}
+#soccer-fields {width:336px; height:265px;}
+	#soccer-fields .bubble {top:90%; left:30%;}
+#schoolhouse {width:61px; height:90px;}
+	#schoolhouse .bubble {top:0px;}
+#computers {width:68px; height:112px;}
+    #computers .bubble {top:10%; left:80%;}
+#bus-yard {width:256px; height:286px;}
+	#bus-yard .bubble {left:70%;}
+#hockey {width:121px; height:135px;}
+#street-games {width:145px; height:103px;}
+#grand-playhouse {width:326px; height:290px;}
+#gph {width:326px; height:290px;}
+#martial-arts {width:326px; height:290px;}
+	#grand-playhouse .bubble, #gph .bubble, #martial-arts .bubble {left:50%; top:80%;}
+#challenge-course {width:218px; height:138px;}
+#trails {width:1121px; height:480px;}
+	#trails .bubble {left:80%; top:120%;}
+#horseback-riding { width: 173px; height: 387px; }
+	#horseback-riding .bubble { left:-100%; top:70%; }	
+#storytelling {width:43px; height:51px;}
+    #storytelling .bubble {top:140%; left:-300%;}
+#boating {width:246px; height:205px;}
+#zipline {width:358px; height:173px;}
+    #zipline .bubble {top:180%; left:20%;}
+#archery {width:195px; height:131px;}
+		#archery .bubble { left: -20px; top: 90px; }
+#music {width:171px; height:143px;}
+#dome {width:143px; height:302px;}
+#gaga-complex {width:143px; height:302px;}
+#water-park {width:143px; height:302px;}
+	#water-park .bubble, #gaga-complex .bubble, #dome .bubble {top:20px;}
+#ping-pong {width:98px; height:45px;}
+	#ping-pong .bubble {top:0; left:-50%}
+#yoga {width:165px; height:93px;}
+	#yoga .bubble, #yoga .bubblePerm {left:-55px;}
+#junior-soccer {width:156px; height:97px;}
+	#junior-soccer .bubble {left:-35px; top:20px;}
+#pool-locker-rooms {width:434px; height:162px;}
+	#pool-locker-rooms .bubble {top:105px; left:15px;}
+#pools {width:284px; height:209px;}
+	#pools .bubble {top:80px; left:-15px;}
+#basketball {width:173px; height:135px;}
+#basketball2 {width:71px; height:58px;}
+#volleyball {width:122px; height:102px;}
+#water-misters {width:28px; height:38px;}

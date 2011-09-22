@@ -1,4 +1,4 @@
-$(function(){
+$( function () {
 	$('.map').supermap({
 		zoom:			{ start: .5, increment: .1, max: 1, min: .5 },
 		position: 		'center',
