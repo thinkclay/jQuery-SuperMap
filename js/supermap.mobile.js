@@ -23,19 +23,12 @@
 
         return this.each(function () {
             var $this = $(this);
-            $this.css({
-                position: 'relative',
-                overflow: 'hidden',
-                cursor: 'move'
-            });
-            $this.wrapInner($('<div />').addClass('imgContent').css({
-                zIndex: "1",
-                position: "absolute"
-            }));
+            $this.css({ position: 'relative', overflow: 'hidden', cursor: 'move' });
+            $this.wrapInner( $('<div />').addClass('imgContent').css({ zIndex: '1', position: 'absolute' }) );
 
-            var content = $(".imgContent"),
+            var content = $('.imgContent'),
                 image = $('#map-bg'),
-                point = $this.find("." + sets.markerClass),
+                point = $this.find('.'+sets.markerClass),
                 mouseDown = false,
                 mouseMove = false,
                 mx, my, ex, ey, imgw = image.width(),

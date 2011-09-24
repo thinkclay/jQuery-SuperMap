@@ -15,7 +15,7 @@
             onMarkerClick: function () {},
             onPopupClose: function () {},
             onMapLoad: function () {
-							mapKeyGo();
+				mapKeyGo();
 			}
         };
 
@@ -23,19 +23,12 @@
 
         return this.each(function () {
             var $this = $(this);
-            $this.css({
-                position: 'relative',
-                overflow: 'hidden',
-                cursor: 'move'
-            });
-            $this.wrapInner($('<div />').addClass('imgContent').css({
-                zIndex: "1",
-                position: "absolute"
-            }));
+            $this.css({ position: 'relative', overflow: 'hidden', cursor: 'move' });
+            $this.wrapInner( $('<div />').addClass('imgContent').css({ zIndex: '1', position: 'absolute' }) );
 
-            var content = $(".imgContent"),
+            var content = $('.imgContent'),
                 image = $('#map-bg'),
-                point = $this.find("." + sets.markerClass),
+                point = $this.find('.'+sets.markerClass),
                 mouseDown = false,
                 mouseMove = false,
                 mx, my, ex, ey, imgw = image.width(),
@@ -63,27 +56,27 @@
                     map.zoom(null, (imgw * sets.zoom.start), true);
 
                     switch (position) {
-                    case "center":
+                    case 'center':
                         var x = (divw - $('#map-bg')) / 2,
                             y = (divh - $('#map-bg')) / 2;
                         break;
 
-                    case "top left":
+                    case 'top left':
                         var x = 0,
                             y = 0;
                         break;
 
-                    case "top right":
+                    case 'top right':
                         var x = divw - imgw,
                             y = 0;
                         break;
 
-                    case "bottom left":
+                    case 'bottom left':
                         var x = 0,
                             y = divh - imgh;
                         break;
 
-                    case "bottom right":
+                    case 'bottom right':
                         var x = divw - imgw,
                             y = divh - imgh;
                         break;
@@ -106,10 +99,7 @@
                         }
                     }
 
-                    content.css({
-                        top: y + 'px',
-                        left: x + 'px'
-                    });
+                    content.css({ 'top': y+'px', 'left': x+'px' });
                 },
 
                 preloader: function () {
@@ -130,31 +120,24 @@
 	                );
 
                     $(loadimg).load(function () {
-                        image.css({
-                            visibility: 'visible'
-                        });
-												// Brian 0824
-												$('ul.map_buttons').css({
-													visibility:'visible'
-												});
+                        image.css({ 'visibility' : 'visible' });
+						$('ul.map_buttons').css({ 'visibility' : 'visible' });
 
-                        $this.find(".loader").fadeOut(1000, function () {
+                        $this.find('.loader').fadeOut(1000, function () {
                             $(this).remove();
-
                             sets.onMapLoad.call(this)
                         });
-                    }).attr("src", src);
+                    }).attr('src', src);
 
                     image.removeAttr("alt")
-
                 },
 
                 mouse: function (e) {
                     var x = e.pageX,
                         y = e.pageY;
                     return {
-                        x: x,
-                        y: y
+                        x : x,
+                        y : y
                     }
                 },
 
@@ -169,8 +152,8 @@
                         check = map.check(left, top);
 
                     content.css({
-                        top: check.y + 'px',
-                        left: check.x + 'px'
+                        top : check.y+'px',
+                        left : check.x+'px'
                     });
                 },
 
@@ -182,8 +165,8 @@
                     var currW = $('#map-bg').width();
                     var currH = $('#map-bg').height();
 
-
-                    if (min || max) return false;
+                    if (min || max) 
+                    	return false;
 
                     if (direction == 'in') {
                         zoom += sets.zoom.increment;
@@ -227,7 +210,7 @@
                             }));
 
                             if ($this.attr('data-type') == 'image') {
-                                prepend = '<img src="img/map/' + sets.prefix + $this.attr('id') + '.png" alt="' + $this.attr('id') + '" />';
+                                prepend = '<img src="img/map/'+sets.prefix+$this.attr('id')+'.png" alt="'+$this.attr('id')+'" />';
                                 $this.prepend(prepend);
                             }
 
@@ -254,18 +237,11 @@
                                 $this.children('img').width($this.width());
 
                             }
-
                         }
 
-                        $this.css({
-                            position: 'absolute',
-                            zIndex: '2',
-                            top: y + 'px',
-                            left: x + 'px'
-                        });
+                        $this.css({ 'position' : 'absolute', 'zIndex' : '2', 'top' : y+'px', 'left' : x+'px' });
                     });
                 }
-
             }; // end: map
             
             content.bind({
@@ -316,9 +292,7 @@
 	            
 	            mouseout: function () {
 					$('.bubble').fadeOut();	
-					$('.bubblePerm b').click(function(){
-								$('.bubblePerm').fadeOut().remove();
-							});
+					$('.bubblePerm b').click( function () { $('.bubblePerm').fadeOut().remove(); } );
 				},
 				
 				click: function () {
@@ -346,16 +320,11 @@
 	                        center_x = -px + divw / 2 - pointw / 2,
 	                        center = map.check(center_x, center_y);
 	
-	                    content.animate({
-	                        top: center.y + 'px',
-	                        left: center.x + 'px'
-	                    });
+	                    content.animate({ 'top' : center.y+'px', 'left' : center.x+'px' });
 	                }
 
-	                $('.bubble, .bubble-select').remove(); // Brian 0824: added .bubble-select
-	                $('.bubblePerm b').click(function(){
-								$('.bubblePerm').fadeOut().remove();
-							});
+	                $('.bubble, .bubble-select').remove(); 
+	                $('.bubblePerm b').click( function () { $('.bubblePerm').fadeOut().remove(); } );
 									
 	                $("."+sets.popupClass).remove();
 	
@@ -403,35 +372,48 @@
 	                            path = data.gallery.album['@attributes'].lgPath;
 	
 	                            $slide.prepend('<div id="ssp-i" class="ssp"><div class="inner"></div></div>');
-															
-															
-															
-															for (i = 0; i < data.gallery.album.img.length; i++) {
-	                              $('#ssp-i .inner').append('<img src="' + path + data.gallery.album.img[i]['@attributes'].src + '" />');
+								
+								$('body').append('<div id="test" style="width: 500px;"></div>');
+														
+								for (i = 0; i < data.gallery.album.img.length; i++) {
+									$('#ssp-i .inner').append('<img src="'+path+data.gallery.album.img[i]['@attributes'].src+'" />');
 	                            }
-	                            
-	
-	                            $('#ssp-i img:gt(0)').show();
-	
-	                            autoRotate = setInterval(function () {
-	                                $('#ssp-i .inner img:first-child').hide().next('img').fadeIn().end().appendTo('#ssp-i .inner');
-	                            }, 3000);
-	                            
-	                          
-	                            $('#ssp-i').append('<span class="count">'+data.gallery.album.img.length+'</span>');
-	
-	                            $('#ssp-i').append('<a href="#" class="ssp-control next"></a><a href="#" class="ssp-control prev"></a>');
-	
-	                            $('.ssp-control').live('click', function () {
-	                                clearInterval(autoRotate);
-	
-	                                if ($(this).hasClass('next')) $('#ssp-i .inner img:visible').hide().next('img').fadeIn().end().appendTo('#ssp-i .inner');
-	
-	                                if ($(this).hasClass('prev')) {
-	                                    $('#ssp-i .inner img:visible').hide();
-	                                    $('#ssp-i .inner img:last').fadeIn().prependTo('#ssp-i .inner');
-	                                }
-	                            });
+								
+								/** 
+								 * Start rotating through the images by:
+								 * 
+								 * 1: hide all images by default (in css) and then show first image 
+								 * 2: hide currently visible image
+								 * 3: move current image to end of DOM container
+								 * 4: display next image
+								 * 5: allow override by next / prev
+								 */	
+								$('#ssp-i img:first-child').show().addClass('first');
+								var $sspInner = $('#ssp-i .inner');
+								
+								var autoRotate = setInterval( function () {	
+									// fadeIn() doesnt delay execution, you'd have to provide a callback for that
+									$sspInner.find('img:first-child').appendTo($sspInner).hide().next('img').fadeIn();
+								}, 3000);
+								
+								var controlNext = $('<a href="#" class="ssp-control next" />');
+								var controlPrev = $('<a href="#" class="ssp-control prev" />');
+								var images = $('#test img');
+								
+								$('#ssp-i').append(controlNext, controlPrev);
+								
+								controlNext.bind('click', function(e) {
+									clearInterval(autoRotate);
+									$sspInner.find('img:visible').hide().next('img').fadeIn().end().appendTo($sspInner);
+									return false;
+								});
+								
+								controlPrev.bind('click', function(e) {
+									clearInterval(autoRotate);
+									$sspInner.find('img:visible').hide();
+	                                $sspInner.find('img:last-child').prependTo($sspInner).fadeIn();
+									return false; 
+								});
 	                        }
 	                    });
 	                }
@@ -496,9 +478,12 @@
 				}
             });
 
-            $this.find(".close").live('click', function () {
+            $this.find('.close').live('click', function () {
                 $('.point').removeClass('selected');
-                $(this).parent().remove();
+                
+                $('#test').empty();
+				$(this).parent().empty().remove();  
+				              
 				clearInterval(autoRotate);
                 setTimeout(function () { sets.onPopupClose.call(this) }, 100);
 

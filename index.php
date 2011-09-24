@@ -291,7 +291,7 @@ endif;
 				</div>
 			</div>
 			
-			<div class="point activity" id="dance-hall" rel="p-56-226" data-type="image" data-image="http://content.colemancountry.com/ssp/images.php?album=54&w=575&h=323&s=0&q=80&sh=1&tw=100&th=100&ts=0&tlw=16&tlh=16&tq=60&tsh=1&pw=54&ph=40&aps=0">
+			<div class="point activity" id="dance-hall" rel="p-51-206" data-type="image" data-image="http://content.colemancountry.com/ssp/images.php?album=54&w=575&h=323&s=0&q=80&sh=1&tw=100&th=100&ts=0&tlw=16&tlh=16&tq=60&tsh=1&pw=54&ph=40&aps=0">
 				<h1>Mrs. G's Dance Hall</h1>
 				<div class="description">
 				<div class="inner">
