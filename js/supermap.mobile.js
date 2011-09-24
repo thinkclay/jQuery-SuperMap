@@ -377,30 +377,48 @@
 	
 	                            $slide.prepend('<div id="ssp-i" class="ssp"><div class="inner"></div></div>');
 	
-	                            
 	                            for (i = 0; i < data.gallery.album.img.length; i++) {
-	                                $('#ssp-i .inner').append('<img src="' + path + data.gallery.album.img[i]['@attributes'].src + '" />');
+									$('#ssp-i .inner').append('<img src="'+path+data.gallery.album.img[i]['@attributes'].src+'" />');
 	                            }
-	
-	                            $('#ssp-i img:gt(0)').show();
-	
-	                            autoRotate = setInterval(function () {
-	                                $('#ssp-i .inner img:first').hide().next('img').fadeIn(1000).end().appendTo('#ssp-i .inner');
-	                            }, 5000);
-	
-	                            $('#ssp-i').append('<a class="ssp-control next"><img src="img/ui/slide-next.png"></a><a class="ssp-control prev"><img src="img/ui/slide-prev.png"></a>');
-	
-	                            $('.ssp-control').live('click', function () {
-	                                clearInterval(autoRotate);
-	
-	                                if ($(this).hasClass('next')) {
-	                                	$('#ssp-i .inner img:visible').hide().next('img').fadeIn().end().appendTo('#ssp-i .inner');
-	                                }
-	                                else if ($(this).hasClass('prev')) {
-	                                    $('#ssp-i .inner img:visible').hide();
-	                                    $('#ssp-i .inner img:last').fadeIn().prependTo('#ssp-i .inner');
-	                                }
-	                            });
+								
+								/** 
+								 * Start rotating through the images by:
+								 * 
+								 * 1: hide all images by default (in css) and then show first image 
+								 * 2: hide currently visible image
+								 * 3: move current image to end of DOM container
+								 * 4: display next image
+								 * 5: allow override by next / prev
+								 */	
+								$('#ssp-i img:first-child').show().addClass('first');
+								var $sspInner = $('#ssp-i .inner');
+								
+								var autoRotate = setInterval( function () {	
+									$sspInner.find('img:first-child').appendTo($sspInner).hide().next('img').fadeIn();
+								}, 4000);
+								
+								var controlNext = $('<a href="#" class="ssp-control next" />');
+								var controlPrev = $('<a href="#" class="ssp-control prev" />');
+								var images = $('#test img');
+								
+								$('#ssp-i').append(controlNext, controlPrev);
+								
+								controlNext.bind('click', function(e) {
+									if (typeof autoRotate != 'undefined')
+										clearInterval(autoRotate);
+										
+									$sspInner.find('img:visible').hide().next('img').fadeIn().end().appendTo($sspInner);
+									return false;
+								});
+								
+								controlPrev.bind('click', function(e) {
+									if (typeof autoRotate != 'undefined')
+										clearInterval(autoRotate);
+										
+									$sspInner.find('img:visible').hide();
+	                                $sspInner.find('img:last-child').prependTo($sspInner).fadeIn();
+									return false; 
+								});
 	                        },
 	                        error: function () {
 	                        	alert('You must have an internet connection to view slideshows and/or videos.');

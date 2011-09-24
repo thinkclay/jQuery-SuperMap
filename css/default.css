@@ -1,4 +1,14 @@
 /** SuperMap Styles **/
+#content {
+	border: 5px solid #530000;
+	border-radius: 8px;
+	font-family: Futura, Avenir, Arial, Helvetica, Verdana, sans-serif;
+	height: 500px; 
+	overflow: hidden; 
+	margin: 0 auto; 
+	width: 940px; 
+}
+
 .loader { background: url('../img/ui/loader.gif') no-repeat center #fff; }
 
 .map { height: 500px; margin: 0; width: 960px; }
@@ -12,12 +22,8 @@
 	cursor: pointer;
 }
 
-
 .slide { 
 	background: url('../img/ui/content-bg.jpg'); 
-	-moz-border-radius: 0 0 8px 8px; 
-	-webkit-border-radius: 0 0 8px 8px; 
-	-o-border-radius: 0 0 8px 8px; 
 	border-radius: 0 0 8px 8px;
 	color: #92030d;
 	display: none; 
@@ -54,7 +60,7 @@
 		text-decoration: none;
 		width: 83px;
 	}
-		.slide h1 { font-weight: normal; float: left; font-size: 20px; line-height: 22px; padding-bottom: 10px; width: 30%; display:block; height:38px; }
+		.slide h1 { font-weight: normal; float: left; font-size: 20px; height: 38px; line-height: 22px; padding-bottom: 10px; width: 30%; }
 		.slide h1 em {display:block; font-size:13px; line-height:15px;}
 				
 .bubble, .bubblePerm {
@@ -68,6 +74,7 @@
 	white-space:nowrap;
 	font-size:12px;
 	margin:-50% 0 0 -30% !important;
+	pointer-events:none;
 }
 .bubble-select {
 	background: #530000;
@@ -76,19 +83,30 @@
 	display: none;
 	padding: 5px 10px 10px;
 }
-	.bubble h1, .bubblePerm h1, .bubble-select h1 { font: 14px Georgia, serif; margin: 5px; white-space: nowrap; }
-	.bubble a, .bubblePerm a, .bubble-select a { background: #ddd; color: #444; display: block; margin: 5px; padding: 5px; }
+	.bubble h1, .bubblePerm h1, .bubble-select h1 { font-size: 14px; margin: 5px; white-space: nowrap; text-align: left; }
+	.bubble a, .bubblePerm a, .bubble-select a { 
+		background: #e6cfb0;
+		border-radius: 6px; 
+		color: #530000; 
+		display: block; 
+		margin: 5px; 
+		padding: 5px;
+		text-align: center;
+		text-decoration: none; 
+	}
+	.bubble-select a:hover, .bubble-select a:active, .bubble-select a:focus { background: #f2f2f2; color: #333; }
+	
 	.bubble .close, .bubblePerm .close, .bubble-select .close {
-		display: block;
-		text-indent: -9999px;
-		position: absolute;
-		bottom: -35px;
-		right: 10px;
-		width: 60px;
-		height: 30px;
-		outline: none;
 		background: url('../img/ui/close.png') no-repeat;
 		cursor: pointer;
+		display: block;
+		height: 7px;
+		outline: none;
+		position: absolute;
+		right: 0;
+		text-indent: -9999px;
+		top: 0;
+		width: 7px;
 	}
 
 	.bubble p, .bubblePerm p, .bubble-select p { font-size: 10px; line-height: 1.6em; margin: 5px 0; }
@@ -113,39 +131,30 @@ ul.map_buttons, ul.map_buttons li { display:block; list-style:none; padding:0; m
 		}
 		.map_buttons a:hover { background:#111; color:#fff; }
 
-#map_zoom { float: right; margin: 0; padding: 0px 0 0; }
-	#map_zoom li { float: left; list-style: none; margin-left: 20px; }
+#map_zoom { float: right; left: 50px; margin: 0; padding: 0; position: absolute; top: 5px; z-index: 5; }
+	#map_zoom li { float: left; list-style: none; margin: 0 15px 0 0; }
 		#map_zoom li a { 
-			-moz-border-radius:8px;
-			-webkit-border-radius:8px;
-			border-radius:8px;
 			color: #222;
-			padding: 6px 15px 6px 40px; 
 			text-decoration: none; 
 			text-shadow: 0 1px 1px #ddd; 
 		}
-		#map_zoom li #zoom_in { background: transparent;  }
-		#map_zoom li #zoom_out { background: transparent; }
+		#map_zoom li #zoom_in, #map_zoom li #zoom_out { background: none; opacity: .9; filter: alpha(opacity=90); }
+		#map_zoom li #zoom_in:hover, #map_zoom li #zoom_in:active, #map_zoom li #zoom_in:focus, 
+		#map_zoom li #zoom_out:hover, #map_zoom li #zoom_out:active, #map_zoom li #zoom_out:focus { 
+			opacity: 1; filter: alpha(opacity=100);
+		}
+		#map_zoom li #zoom_in.disabled, #map_zoom li #zoom_out.disabled { opacity: .3; }
+			#map_zoom li a img {width:120px;}
 		
 .activity { background: none; opacity: 0; filter:alpha(opacity=0); }
 .activity:hover, .activity.selected { opacity: 1; filter:alpha(opacity=100); }
 	.activity:hover img, .activity.selected img { opacity: .6; filter:alpha(opacity=60); }
 	
-	/* 
+	
+	
+/* 
  * Custom skin UI for Coleman Country Interactive Map
- * Brian 081611
- *
  */
-*, html, a {outline:0 none;}
-
-#content {height:500px; overflow:hidden; border:5px solid #530000; margin: 0 auto; border-radius:8px; width:940px; font-family:Futura, Avenir, Arial, Helvetica, Verdana, sans-serif;}
-
-#map_zoom {padding:0; position:absolute; z-index:2; left:50px; top:5px;}
-#map_zoom li {margin-left:0; margin-right:15px;}
-#map_zoom li a#zoom_in, #map_zoom li a#zoom_out {background-image:none; background-color:transparent; border-radius:0; padding:0; opacity:0.9; filter:alpha(opacity=90);}
-#map_zoom li a#zoom_in:hover, #map_zoom li a#zoom_in:active, #map_zoom li a#zoom_in:focus, #map_zoom li a#zoom_out:hover, #map_zoom li a#zoom_out:active, #map_zoom li a#zoom_out:focus {outline:0 none; opacity:1; filter:alpha(opacity=100);}
-#map_zoom li a img {width:120px;}
-
 ul.map_buttons {display:block; background:url('../img/ui/content-bg.jpg') no-repeat center top; padding:0px 0 0 0 !important; height:378px; margin:0px 10px 0; position:relative; z-index:5; z-index:10; border-radius:8px 8px 0 0; margin:0 20px}
 /* On active, .map_buttons {margin-top:-246px:}*/
 ul.map_buttons li {float:left; margin:5px 0px 0 0px; position:relative; left:12px; top:10px;}
@@ -157,13 +166,6 @@ ul.map_buttons li.keyBtn {float:right; margin:-33px 20px 0 0; width:115px; left:
 ul.map_buttons li.keyBtn a {background:transparent url('../img/ui/map-key-btn-bg.jpg') no-repeat center top; color:#FFF; width:113px; text-align: center; float:right; position:absolute; font-size:14px; padding:5px 0 5px 0; border-radius:8px 8px 0 0;}
 ul.map_buttons li.keyBtn a:hover, ul.map_buttons li.keyBtn a:active, ul.map_buttons li.keyBtn a:focus {color:#000;}
 ul.map_buttons li.keyBtn a img {width:70px;}
-
-
-.bubble-select h1 {font-family:Futura, Avenir, Arial, Helvetica, Verdana, sans-serif; text-align:left;}
-.bubble-select a {background:#e6cfb0; text-decoration:none; text-align:center;border-radius:6px; color:#530000;}
-.bubble-select a:hover, .bubble-select a:active, .bubble-select a:focus {background:#f2f2f2; color:#333;}
-.bubble-select .close {height:7px; width:7px; right:0; top:0;}
-
 
 .slide .close {right:400px;}
 #locate {position:absolute; bottom:10px; left:15px; font-size:12px; text-decoration:none; color:#92030D; font-weight:bold;}

@@ -158,26 +158,34 @@
                 },
 
                 zoom: function (direction, w, start) {
-                    map_width = $('#map-bg').width();
-                    max = (zoom >= sets.zoom.max && direction == 'in');
-                    min = (zoom <= sets.zoom.min && direction == 'out');
+                    var map_width = $('#map-bg').width(),
+						max = (zoom >= sets.zoom.max && direction == 'in'),
+                    	min = (zoom <= sets.zoom.min && direction == 'out'),
+                    	zoom_in = $(sets.zoomInButton),
+                    	zoom_out = $(sets.zoomOutButton),
+                    	currW = $('#map-bg').width(),
+                    	currH = $('#map-bg').height();
 
-                    var currW = $('#map-bg').width();
-                    var currH = $('#map-bg').height();
-
-                    if (min || max) 
+                    if (min) {
+                    	zoom_out.addClass('disabled');
                     	return false;
+                    }
+                    
+                    if (max) {
+                    	zoom_in.addClass('disabled');
+                    	return false;
+                    }
 
                     if (direction == 'in') {
                         zoom += sets.zoom.increment;
-
+						zoom_out.removeClass('disabled');
                         $('#map-bg').width(Math.round(map_width += (map_width * sets.zoom.increment)));
                         $('#map-bg').height(Math.round(map_width * y_ratio));
                     }
 
                     if (direction == 'out') {
                         zoom -= sets.zoom.increment;
-
+						zoom_in.removeClass('disabled');
                         $('#map-bg').width(map_width -= (map_width * sets.zoom.increment));
                         $('#map-bg').height(map_width * y_ratio);
                     }
@@ -284,10 +292,7 @@
 	
 	                $this.append($("<div />").addClass('bubble'));
 	
-	                $('.bubble').html($this.find('h1').text()).css({
-	                    position: 'absolute',
-	                    zIndex: '5',
-	                }).fadeIn('slow');
+	                $('.bubble').html($this.find('h1').text()).css({ 'position' : 'absolute', 'zIndex' : '5' }).fadeIn('slow');
 	            },
 	            
 	            mouseout: function () {
@@ -301,7 +306,7 @@
 	                if (mouseMove) 
 	                	return false;
 	
-					if ( typeof autoRotate != 'undefined' )
+					if (typeof autoRotate != 'undefined')
 	                    clearInterval(autoRotate);
 					
 	                var $this = $(this),
@@ -334,7 +339,7 @@
 	
 	                    html = '<h1>Click to view more</h1>';
 	                    for (i = 0; i < id.length; i++) {
-	                        html += '<a href="' + id[i] + '" onclick="return false;">' + $(id[i]).find('h1').text() + '</a>';
+	                        html += '<a href="'+id[i]+'" onclick="return false;">'+$(id[i]).find('h1').text()+'</a>';
 	                    }
 	
 	                    $this.after($("<div />").addClass('bubble-select').html(html).append($("<a />").addClass("close")));
@@ -392,9 +397,8 @@
 								var $sspInner = $('#ssp-i .inner');
 								
 								var autoRotate = setInterval( function () {	
-									// fadeIn() doesnt delay execution, you'd have to provide a callback for that
 									$sspInner.find('img:first-child').appendTo($sspInner).hide().next('img').fadeIn();
-								}, 3000);
+								}, 4000);
 								
 								var controlNext = $('<a href="#" class="ssp-control next" />');
 								var controlPrev = $('<a href="#" class="ssp-control prev" />');
@@ -403,13 +407,17 @@
 								$('#ssp-i').append(controlNext, controlPrev);
 								
 								controlNext.bind('click', function(e) {
-									clearInterval(autoRotate);
+									if (typeof autoRotate != 'undefined')
+										clearInterval(autoRotate);
+										
 									$sspInner.find('img:visible').hide().next('img').fadeIn().end().appendTo($sspInner);
 									return false;
 								});
 								
 								controlPrev.bind('click', function(e) {
-									clearInterval(autoRotate);
+									if (typeof autoRotate != 'undefined')
+										clearInterval(autoRotate);
+										
 									$sspInner.find('img:visible').hide();
 	                                $sspInner.find('img:last-child').prependTo($sspInner).fadeIn();
 									return false; 
@@ -484,7 +492,9 @@
                 $('#test').empty();
 				$(this).parent().empty().remove();  
 				              
-				clearInterval(autoRotate);
+				if (typeof autoRotate != 'undefined')
+					clearInterval(autoRotate);
+					
                 setTimeout(function () { sets.onPopupClose.call(this) }, 100);
 
                 return false

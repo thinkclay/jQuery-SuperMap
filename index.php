@@ -11,6 +11,7 @@ endif;
 	<title>Coleman Country Day Camp Interactive Map</title>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+	<link href="css/reset.css" rel="stylesheet" type="text/css" />
 	
 <?php if ($mobile=='1'): ?>
  	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
