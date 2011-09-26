@@ -538,7 +538,7 @@
 		
 		                $('.bubblePerm').html($this.find('h1').text()).css({
 		                    position: 'absolute',
-		                    zIndex: '10',
+		                    zIndex: '10'
 		                }).append(' <b>X</b>').fadeIn('slow');
 					});
 	
