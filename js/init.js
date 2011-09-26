@@ -8,6 +8,6 @@ $(function(){
 		setCenter: 		true,
 		outsideButtons: '.map_buttons a, .bubble-select a',
 		zoomInButton:	'#map_zoom #zoom_in',
-		zoomOutButton:	'#map_zoom #zoom_out',
+		zoomOutButton:	'#map_zoom #zoom_out'
 	});
 });

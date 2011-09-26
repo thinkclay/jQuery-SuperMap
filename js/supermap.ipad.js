@@ -399,30 +399,92 @@
 								 * 4: display next image
 								 * 5: allow override by next / prev
 								 */	
+								var current = 1,
+									total = $('#ssp-i img').length,
+									$sspInner = $('#ssp-i .inner'),
+									$controlNext = $('<a href="#" class="ssp-control next" />'),
+									$controlPrev = $('<a href="#" class="ssp-control prev" />'),
+									$controlPause = $('<a href="#" class="ssp-pause">Pause</a>'),
+									$controlPlay = $('<a href="#" class="ssp-play">Play</a>'),
+									autoRotate = setInterval( function () {
+										$sspInner.find('img:visible').hide().next('img').fadeIn().end().appendTo($sspInner);
+						
+							        	if (current < total) {
+											current++;
+											$('.counter span').text(current);
+										}
+										else {
+											current = 1;
+											$('.counter span').text(current);
+										}
+									}, 4000);
+									
 								$('#ssp-i img:first-child').show().addClass('first');
-								var $sspInner = $('#ssp-i .inner');
 								
-								var autoRotate = setInterval( function () {	
-									$sspInner.find('img:first-child').appendTo($sspInner).hide().next('img').fadeIn();
-								}, 4000);
+								$('#ssp-i')
+									.append($controlPlay, $controlPause, $controlNext, $controlPrev)
+									.append('<div class="counter"><span>'+current+'</span> / '+total+'</div>');
 								
-								var controlNext = $('<a href="#" class="ssp-control next" />');
-								var controlPrev = $('<a href="#" class="ssp-control prev" />');
-								var images = $('#test img');
+								$controlPause.bind('click', function(e) {
+									clearInterval(autoRotate);
+									$controlPause.hide();
+									$controlPlay.show();
+								});
 								
-								$('#ssp-i').append(controlNext, controlPrev);
+								$controlPlay.bind('click', function(e) {
+									autoRotate = setInterval( function () {
+										$sspInner.find('img:visible').hide().next('img').fadeIn().end().appendTo($sspInner);
+						
+							        	if (current < total) {
+											current++;
+											$('.counter span').text(current);
+										}
+										else {
+											current = 1;
+											$('.counter span').text(current);
+										}
+									}, 4000);
+									
+									$controlPlay.hide();
+									$controlPause.show();
+								});
 								
-								controlNext.bind('click', function(e) {
-									if (typeof autoRotate != 'undefined')
+								$controlNext.bind('click', function(e) {
+									if (typeof autoRotate != 'undefined') {
 										clearInterval(autoRotate);
-										
+										$controlPause.hide();
+										$controlPlay.show();
+									}
+									
 									$sspInner.find('img:visible').hide().next('img').fadeIn().end().appendTo($sspInner);
+						
+						        	if (current < total) {
+										current++;
+										$('.counter span').text(current);
+									}
+									else {
+										current = 1;
+										$('.counter span').text(current);
+									}
+									
 									return false;
 								});
 								
-								controlPrev.bind('click', function(e) {
-									if (typeof autoRotate != 'undefined')
+								$controlPrev.bind('click', function(e) {
+									if (typeof autoRotate != 'undefined') {
 										clearInterval(autoRotate);
+										$controlPause.hide();
+										$controlPlay.show();
+									}
+									
+									if (current > 1) {
+										current--;
+										$('.counter span').text(current);
+									}
+									else {
+										current = total;
+										$('.counter span').text(current);
+									}
 										
 									$sspInner.find('img:visible').hide();
 	                                $sspInner.find('img:last-child').prependTo($sspInner).fadeIn();
