@@ -38,6 +38,7 @@
                 point = $this.find('.' + sets.markerClass),
                 mouseDown = false,
                 mouseMove = false,
+                mouseCoordinates = false,
                 mx, my, ex, ey, imgw = image.width(),
                 imgh = image.height(),
                 imgw = image.width(),
@@ -58,7 +59,7 @@
                     	x = divw - $('#map-bg').width();
                     else if (x > 0) 
                     	x = 0;
-					
+										
                     return {
                         x: x,
                         y: y
@@ -170,10 +171,7 @@
                         left = ex + movex,
                         check = map.check(left, top);
 
-                    content.css({
-                        top: check.y + 'px',
-                        left: check.x + 'px'
-                    });
+                    content.css({ top: check.y+'px', left: check.x+'px' });
                 },
 
                 zoom: function(direction, w, start) {
@@ -185,7 +183,6 @@
                         zoom_out = $(sets.zoomOutButton),
                         currW = $('#map-bg').width(),
                         currH = $('#map-bg').height();
-
 
                     if (min) {
                         zoom_out.addClass('disabled');
@@ -202,11 +199,11 @@
                         zoom_out.removeClass('disabled');
                         $('#map-bg').width(Math.round(map_width += (map_width * sets.zoom.increment)));
                         $('#map-bg').height(Math.round(map_width * y_ratio));
-
+						
                         if (zoom >= sets.zoom.max)
-                            zoom_in.addClass('disabled');
-                        
-                        content.css({ 'top': '0px', 'left': '0px' }); 
+                            zoom_in.addClass('disabled');  
+                            
+                        map.update(mouseCoordinates);
                     }
 
                     if (direction == 'out') {
@@ -217,8 +214,8 @@
 
                         if (zoom <= sets.zoom.min)
                             zoom_out.addClass('disabled');
-
-                        content.css({ 'top': '0px', 'left': '0px' }); 
+                            
+                        map.update(mouseCoordinates);
                     }
 
                     if (w != '' && typeof w != 'undefined') {
@@ -301,8 +298,10 @@
                 },
                 mousemove: function(e) {
                     mouseMove = true;
+                    mouseCoordinates = e;
 
-                    if (mouseDown) map.update(e)
+                    if (mouseDown) 
+                    	map.update(e)
 
                     return false
                 },
@@ -344,7 +343,8 @@
                 click: function() {
                     slide = true;
 
-                    if (mouseMove) return false;
+                    if (mouseMove) 
+                    	return false;
 
                     var $this = $(this),
                         pointw = $this.width(),

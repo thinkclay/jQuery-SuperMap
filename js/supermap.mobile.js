@@ -38,6 +38,7 @@
                 point = $this.find('.' + sets.markerClass),
                 mouseDown = false,
                 mouseMove = false,
+                mouseCoordinates = false,
                 mx, my, ex, ey, imgw = image.width(),
                 imgh = image.height(),
                 imgw = image.width(),
@@ -200,7 +201,7 @@
                         if (zoom >= sets.zoom.max)
                             zoom_in.addClass('disabled');
                         
-                        content.css({ 'top': '0px', 'left': '0px' }); 
+                        map.update(mouseCoordinates);
                     }
 
                     if (direction == 'out') {
@@ -212,7 +213,7 @@
                         if (zoom <= sets.zoom.min)
                             zoom_out.addClass('disabled');
 
-                        content.css({ 'top': '0px', 'left': '0px' }); 
+                        map.update(mouseCoordinates);
                     }
 
                     if (w != '' && typeof w != 'undefined') {
@@ -300,6 +301,7 @@
                 if (e.touches.length == 1) { // Only deal with one finger
                     var touch = e.touches[0]; // Get the information for finger #1
                     mouseMove = true;
+                    mouseCoordinates = touch;
 
                     if (mouseDown) map.update(touch);
 
