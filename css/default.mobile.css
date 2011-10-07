@@ -40,8 +40,8 @@
 			.view-ssp-i.selected, .view-ssp-v.selected { display: none; }
 	
 	.slide .close { 
-		background: url('../img/ui/dropdown-close.png') no-repeat left bottom;
-		bottom: -20px; 
+		/*background: url('../img/ui/dropdown-close.png') no-repeat left bottom;*/
+		bottom: -28px; 
 		cursor: pointer;
 		height: 28px;
 		position: absolute; 
@@ -50,6 +50,7 @@
 		width: 83px;
 		z-index: 8;
 	}
+	.slide .close:focus, .slide .close:active {opacity:0.7;}
 				
 .bubble {
 	background: #530000;
@@ -130,6 +131,9 @@
 .bubble { border-radius: 10px; font-size: 11px; margin: -50% auto 0 25%; }
 .bubble:hover, .bubble:active, .bubble:focus { display: block !important; opacity: 100 !important; }
 
+#map_zoom li #zoom_in, #map_zoom li #zoom_out { background: none; opacity: 1; filter: alpha(opacity=100); }
+			#map_zoom li #zoom_in.disabled, #map_zoom li #zoom_out.disabled { opacity: .3; }
+
 
 /* iPhone/Android portrait mode */
 @media screen and (max-device-width: 480px) and (orientation:portrait) {
@@ -139,25 +143,38 @@
 		.slide .ssp {width:320px;}
 		.slide .ssp .inner, .slide #ssp-i .inner, .slide .singleimg, .slide .singleimg img { height:179px; width:320px; overflow:hidden !important;}
 		
-		.slide .close { right: 35%; }
+		.slide .close { right: 40%; }
+		.slide .close img {width:100px;}
 		.slide h1 { font-size: 14px; height:auto; line-height: 16px; margin:0; padding:5px 15px 0 15px; position:relative; }
 			.slide h1 em {font-size:12px;}
 		.slide .description { clear: both; float:none; padding:0 15px; height: 58px; width:280px; overflow:hidden; position:relative; }
 		.slide .description p {max-width:280px;}
 		
 		.slide #ssp-i, .slide #ssp-v {clear:both; margin:0; height:179px; width:320px; overflow:hidden; padding:0; float:none; position: relative; z-index: 4;}
-		.slide #ssp-v video {width:320px; height:179px;}
+		.slide #ssp-v video {width:320px; height:159px;}
 		.slide #ssp-i img, .slide .ssp img, .slide .singleimg img {width:320px !important; position:absolute; top:0; left:0;}
 		
-		.ssp-control {padding:0; clear:both; width: 40px !important; overflow:hidden; margin:-31px 0 0 0; position:absolute; z-index:10;}
-			.ssp-control.next { float: right; background:url('../img/ui/slide-next.png') no-repeat left top; display:block; width:38px; height:29px; margin-right:0px; width:auto; top:181px; right:0;}
-			.ssp-control.prev { float: left; background:url('../img/ui/slide-prev.png') no-repeat left top; display:block; width:40px; height:29px; margin-left:0px; width:auto; top:181px; left:0;}
-			.slide #ssp-i .ssp-control img, .slide .ssp .ssp-control img {width:auto !important;}
+			.slide #ssp-i .ssp-control img, .slide .ssp .ssp-control img {width:auto !important;}	
+			
+			.ssp-control {padding: 0; clear:both; width:40px !important; overflow:hidden; margin:-31px 0 0 0; position:absolute; z-index:10; right:5px;}
+			.ssp-play, .ssp-pause {display:none; clear:both; width:77px; height:29px; margin:-29px 0 0 0; position:absolute; z-index:10; right:39px;}
+			.ssp-pause {display:block; background:url('../img/ui/ssp-pause.png') no-repeat left top;}
+			.ssp-play {background:url('../img/ui/ssp-play.png') no-repeat left top;}
+			
+			.ssp-control.next { float: right; background:url('../img/ui/slide-next.png') no-repeat left top; display:block; width:39px; height:29px; top:181px; right:0;}
+			.ssp-control.prev { float: right; background:url('../img/ui/slide-prev.png') no-repeat left top; display:block; width:40px; height:29px; top:181px; right:116px;}
+			.slide #ssp-i .ssp-control.next img {width:39px; height:29px;}
+			.slide #ssp-i .ssp-control.prev img {width:40px; height:29px;}	
+			
+			.counter {position:absolute; right:185px; font-size:12px; top:10px; right:10px; color:#FFF;}
+			
+			
 		
-		.view-ssp-i, .view-ssp-v {position:absolute; margin:0; height:20px; overflow:hidden;}
-		.view-ssp-v {top:155px; right:100px;}
-		.view-ssp-i {top:165px; right:100px;}
-		.view-ssp-v img, .view-ssp-i img { width: 120px; }
+		.view-ssp-i, .view-ssp-v {position:absolute; z-index:1000; margin:0; height:20px; overflow:hidden;}
+		.view-ssp-v {top:155px; left:10px; width:120px;}
+		.view-ssp-i {top:160px; left:10px; z-index:9999; width:180px;}
+		.view-ssp-v img { width: 120px; }
+		.view-ssp-i img { width: 180px; }
 		
 		.read-less, .read-more {height:21px; width:21px; white-space:nowrap; text-indent:-5000em; float:right; margin:5px;}
 		.read-less {background:url(../img/ui/text-scroll-up.png) no-repeat left top;}
@@ -172,37 +189,47 @@
 	/* 480w X 320h */
 	/* minus the icon bar and title bar interface, screen height is 208px */
 	
-	.slide { border-radius: 0; font-size: 8px; left: 0; line-height: 8px; margin: 0; width:100%; padding:0px;}
-		.slide .description	{ max-height: 127px; width:35%; float:left; padding-left:5px; }
-		.slide .description p {font-size:11px; line-height:14px;}
+	.slide { border-radius: 0; font-size: 8px; left: 0; line-height: 8px; margin: 0; width:100%; padding:0px; padding-bottom:30px !important; z-index:101;}
+		.slide .description	{ max-height: 127px; width:40%; float:left; padding-left:10px; }
+		.slide .description p {font-size:12px; line-height:15px;}
 		.slide .ssp, .slide .inner, .slide .singleimg { height:auto; }
 		.slide .ssp .inner, .slide .singleimg {border:3px solid #cb051a;}
-		.slide .close { right: 45%; }
-		.slide h1 { font-size: 13px; line-height: 14px; padding-bottom: 2px; width: 90%; padding-left:5px; }
-		#locate {font-size:11px; bottom:5px; left:5px;}
+		.slide .close { right: 45%; bottom:-20px;}
+		.slide .close img {width:100px;}
+		.slide h1 { font-size: 14px; line-height: 14px; padding-bottom: 2px; width: 50%; padding-left:10px; margin:5px 0 0 0; }
+		#locate {font-size:11px; bottom:10px; left:5px;}
 		
-		.read-less, .read-more {height:12px; width:12px; white-space:nowrap; text-indent:0; float:none; position:absolute; left:38%; top:20px;}
-		.read-less img, .read-more img {height:12px; width:12px;}
+		.read-less, .read-more {height:20px; width:20px; white-space:nowrap; text-indent:0; float:none; position:absolute; left:43%; top:20px;}
+		.read-less img, .read-more img {height:20px; width:20px;}
 .read-less {background-image:none;}
 .read-more {background-image:none; top:127px;}
 		
-		.slide #ssp-i, .slide .singleimg {padding:0 0 0 0; height:130px; width:233px; float:right; margin:20px 5px 15px; overflow:hidden;}
+		.slide #ssp-i, .slide .singleimg {padding:0 0 0 0; height:130px; width:233px; float:right; margin:5px 5px 0px; overflow:hidden;}
 		.slide #ssp-v, .slide #ssp-v video {height:130px; width:233px;}
 		.slide #ssp-i img, .slide .singleimg img {height:127px; width:227px;}
+		.slide #ssp-v {float:right; margin:5px 5px 0px; overflow:hidden;}
 		.slide #ssp-v video {height:110px}
 		.slide #ssp-i {height:133px !important;}
 		.slide #ssp-i .inner, .slide .singleimg {width:227px; height:127px; overflow:hidden !important;}
-		.ssp-control { padding-top: 0; float:left; position:absolute; top:125px; z-index:100;}
-			.ssp-control.next { float: right; background-image:none; display:block; width:22px; height:16px; position:absolute; right:4px;}
-			.ssp-control.prev { float: left; background-image: none; display: block; width: 22px; height: 16px; margin-left: -1px; }
-			.slide #ssp-i .ssp-control.next img {width:22px; height:16px;}
-			.slide #ssp-i .ssp-control.prev img {width:22px; height:16px;}
+			
+			.ssp-control {padding: 0; clear:both; width:40px !important; overflow:hidden; position:absolute; z-index:10; right:5px;}
+			.ssp-play, .ssp-pause {display:none; clear:both; width:55px; height:29px; position:absolute; z-index:10; right:44px; top:142px;}
+			.ssp-pause {display:block; background:url('../img/ui/ssp-pause.png') no-repeat center top;}
+			.ssp-play {background:url('../img/ui/ssp-play.png') no-repeat center top;}
+			
+			.ssp-control.next { float: right; background:url('../img/ui/slide-next.png') no-repeat left top; display:block; width:39px; height:29px; top:132px; right:5px;}
+			.ssp-control.prev { float: right; background:url('../img/ui/slide-prev.png') no-repeat left top; display:block; width:40px; height:29px; top:132px; right:99px;}
+			.slide #ssp-i .ssp-control.next img {width:39px; height:29px;}
+			.slide #ssp-i .ssp-control.prev img {width:40px; height:29px;}	
+			
+			.counter {position:absolute; right:185px; margin:-20px 0 0 0; right:15px; font-size:12px; color:#FFF;}
 	
 	.view-ssp-i, .view-ssp-v {position:absolute; margin:0; height:20px; overflow:hidden;}
-		.view-ssp-v {top:130px; right:55px;}
-		.view-ssp-i {top:130px; right:55px;}
-		.view-ssp-v img, .view-ssp-i img { width: 130px; }	
+		.view-ssp-v {top:150px; right:147px; width:90px;}
+		.view-ssp-i {top:150px; right:147px; width:90px;}
+		.view-ssp-v img, .view-ssp-i img { width: 90px; }	
 		
+		#map_zoom {z-index:100;}
 		#map_zoom li { width: 40px; }
 			#map_zoom li a img { width: 40px; }
 }

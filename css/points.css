@@ -6,7 +6,7 @@
 	#mini-golf .bubble {top:20px; left:0px;}
 #big-top {width:279px; height:192px;}
 	#big-top .bubble {left:50%;}
-#tennis {width:278px; height:189px;}
+#tennis {width:278px; height:129px;}
     #tennis .bubble {left:20%; top:80%}
 #tennis2 {width:76px; height:61px;}
 #playport {width:85px; height:88px;}
@@ -34,8 +34,11 @@
 #gymnastics {width:220px; height:218px;}
     #dining-gym .bubble, #dining-room .bubble, #gymnastics .bubble {left:10%; top:20%;}
 #woodworking {width:47px; height:37px;}
-#cabins {width:151px; height:183px;}
-#pioneer-station {width:146px; height:172px;}
+#cabins01 {width:66px; height:59px;}
+#cabins02 {width:37px; height:39px;}
+#cabins03 {width:49px; height:68px;}
+#cabins04 {width:44px; height:48px;}
+#pioneer-station {width:146px; height:102px;}
     #pioneer-station .bubble {left:-80%; top:50%;}
 #cooking { height: 55px; width: 50px; }
 #dance-hall {width:218px; height:138px;}

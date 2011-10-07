@@ -3,7 +3,7 @@
 	border: 5px solid #530000;
 	border-radius: 8px;
 	font-family: Futura, Avenir, Arial, Helvetica, Verdana, sans-serif;
-	height: 500px; 
+	height: 590px; 
 	overflow: hidden; 
 	margin: 0 auto; 
 	width: 940px; 
@@ -11,7 +11,7 @@
 
 .loader { background: url('../img/ui/loader.gif') no-repeat center #fff; }
 
-.map { height: 500px; margin: 0; width: 960px; }
+.map { height: 590px; margin: 0; width: 940px; }
 
 .point { 
 	display: block;
@@ -34,25 +34,29 @@
 	text-shadow: 0 1px 1px #fff;
 	top: 0; 
 	width: 90%; 
-	z-index: 3; 
+	z-index: 6; 
 }
-	.slide .description { clear: left; float: left; height: 263px; margin-bottom: 15px; width: 30%; overflow: hidden; }
+	.slide .description { clear: left; float: left; height: 273px; margin-bottom: 15px; width: 29%; overflow: hidden; }
 	.slide .ssp { background: url('../img/ui/ajax-loader.gif') no-repeat center center; height: 350px; text-align: right; }
-	.slide #ssp-i, .slide #ssp-v, .slide .singleimg { float: right; padding: 0 0 10px 10px; position: relative; width: 66%; z-index: 4; }
+	.slide #ssp-i, .slide #ssp-v, .slide .singleimg { float: right; position: relative; width: 66%; z-index: 4; }
 		.slide .ssp .inner { height: 300px; overflow: hidden; border:5px solid #cb051a; }
-		.slide .singleimg {overflow:hidden; border:5px solid #cb051a;}
-		.slide .singleimg img {width:auto; overflow:hidden;}
+		.slide .singleimg {width:552px; height:310px; overflow:hidden; border:5px solid #cb051a;}
+		.slide .singleimg img {width:552px; height:310px; overflow:hidden;}
 			.slide #ssp-i .inner img { display: none; }
 			.slide .ssp .inner, .slide .ssp img, .slide .ssp video, .slide .ssp object, .slide .ssp embed { width: 100%; }
 			.slide #ssp-i .count {position:absolute; background:#000; color:#FFF; padding:8px; -moz-border-radius:20px; -webkit-border-radius:20px; border-radius:20px; display:none;}
 			
-		.ssp-control { float: right; margin-top: 10px; outline: 0 none; }
+		.ssp-control { float: right; margin-top: 9px; outline: 0 none; margin-right:53px; }
+		.ssp-play, .ssp-pause {display:none; margin-top:9px; position:absolute; right:91px;}
+		.ssp-pause {display:block;}
+		.ssp-play:hover, .ssp-pause:hover {opacity:0.8; filter:alpha(opacity=80);}
+		.ssp-play img, .ssp-pause img {width:77px !important; height:29px !important;}
 		.view-ssp-i, .view-ssp-v { float: right; margin: 0px 180px 0 0; position: relative; z-index: 5; }
 			.view-ssp-i.selected, .view-ssp-v.selected { display: none; }
 	
 	.slide .close { 
-		background: url('../img/ui/dropdown-close.png') no-repeat left bottom;
-		bottom: -20px; 
+		/*background: url('../img/ui/dropdown-close.png') no-repeat left bottom;*/
+		bottom: -28px; 
 		cursor: pointer;
 		height: 28px;
 		position: absolute; 
@@ -143,7 +147,7 @@ ul.map_buttons, ul.map_buttons li { display:block; list-style:none; padding:0; m
 		#map_zoom li #zoom_out:hover, #map_zoom li #zoom_out:active, #map_zoom li #zoom_out:focus { 
 			opacity: 1; filter: alpha(opacity=100);
 		}
-		#map_zoom li #zoom_in.disabled, #map_zoom li #zoom_out.disabled { opacity: .3; }
+		#map_zoom li #zoom_in.disabled, #map_zoom li #zoom_out.disabled { opacity: .3; cursor:default; }
 			#map_zoom li a img {width:120px;}
 		
 .activity { background: none; opacity: 0; filter:alpha(opacity=0); }
@@ -167,23 +171,26 @@ ul.map_buttons li.keyBtn a {background:transparent url('../img/ui/map-key-btn-bg
 ul.map_buttons li.keyBtn a:hover, ul.map_buttons li.keyBtn a:active, ul.map_buttons li.keyBtn a:focus {color:#000;}
 ul.map_buttons li.keyBtn a img {width:70px;}
 
-.slide .close {right:400px;}
+.slide .close {right:430px; cursor:pointer;}
+.slide .close img {width:150px;}
 #locate {position:absolute; bottom:10px; left:15px; font-size:12px; text-decoration:none; color:#92030D; font-weight:bold;}
 #locate:hover, #locate:focus, #locate:active {text-decoration:underline;}
 .slide h1 {margin:0;}
-.read-less, .read-more {position:absolute; height:21px; width:21px; white-space:nowrap; text-indent:-5000em; left:278px;}
+.read-less, .read-more {position:absolute; height:21px; width:21px; white-space:nowrap; text-indent:-5000em; left:265px;}
 .read-less {background:url(../img/ui/text-scroll-up.png) no-repeat left top; top:62px;}
-.read-more {background:url(../img/ui/text-scroll-down.png) no-repeat left top; bottom:49px}
-.view-ssp-i, .view-ssp-v {position:absolute; bottom:5px; right:15px; z-index:5; margin:0;}
+.read-more {background:url(../img/ui/text-scroll-down.png) no-repeat left top; bottom:64px}
+.read-less:hover, .read-more:hover {opacity:0.8; filter:alpha(opacity=80);}
+.view-ssp-i, .view-ssp-v {position:absolute; bottom:22px; right:15px; z-index:5; margin:0; cursor:pointer;}
 .view-ssp-i:hover, .view-ssp-i:active, .view-ssp-i:focus, .view-ssp-v:hover, .view-ssp-v:active, .view-ssp-v:focus {opacity:0.8; filter:alpha(opacity=80);}
-.view-ssp-v {right:110px;}
+.view-ssp-v {right:350px;}
 #ssp-v video {height:310px; width:552px;}
 .description p {margin-top:0;}
-.slide {padding-bottom:0; width:89%; height:360px;}
+.slide {padding-bottom:25px; z-index:10; width:855px; height:360px; cursor:default;}
 .slide .ssp .inner {height:310px; width:552px;}
 .slide #ssp-i .inner img {width:552px; height:310px;}
 .ssp-control:hover, .ssp-control:active, .ssp-control:focus {opacity:0.8; filter:alpha(opacity=80);}
 .ssp-control.next {text-indent:-5000em; background:url('../img/ui/slide-next.png') no-repeat left top; display:block; width:38px; height:29px;}
-.ssp-control.prev {text-indent:-5000em; background:url('../img/ui/slide-prev.png') no-repeat left top; display:block; width:40px; height:29px;}
+.ssp-control.prev {text-indent:-5000em; background:url('../img/ui/slide-prev.png') no-repeat left top; display:block; width:40px; height:29px; margin-right:77px;}
 .bubble, .bubblePerm {-moz-border-radius:10px; -webkit-border-radius:10px; -o-border-radius:10px; border-radius:10px; margin:-50% auto 0 25%;}
 .bubble:hover, .bubble:active, .bubble:focus, .bubblePerm:hover, .bubblePerm:active, .bubblePerm:focus {display:block !important; opacity:100 !important;}
+.counter {position:absolute; right:223px; margin:15px 0 0 0;}
