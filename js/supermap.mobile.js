@@ -66,53 +66,50 @@
                     map.zoom(null, (imgw * sets.zoom.start), true);
 
                     switch (position) {
-                    case "center":
-                        var x = (divw - $('#map-bg')) / 2,
-                            y = (divh - $('#map-bg')) / 2;
-                        break;
-
-                    case "top left":
-                        var x = 0,
-                            y = 0;
-                        break;
-
-                    case "top right":
-                        var x = divw - imgw,
-                            y = 0;
-                        break;
-
-                    case "bottom left":
-                        var x = 0,
-                            y = divh - imgh;
-                        break;
-
-                    case "bottom right":
-                        var x = divw - imgw,
-                            y = divh - imgh;
-                        break;
-
-                    default:
-                        var new_position = position.split(" "),
-                            x = -(new_position[0]),
-                            y = -(new_position[1]);
-
-                        if (y < (divh - imgh)) {
-                            y = divh - imgh
-                        } else {
-                            if (y > 0) y = 0
-                        }
-
-                        if (x < (divw - imgw)) {
-                            x = divw - imgw
-                        } else {
-                            if (x > 0) x = 0
-                        }
+	                    case 'center':
+	                        var x = (divw - $('#map-bg').width()) / 2,
+	                            y = (divh - $('#map-bg').height()) / 2;
+	                        break;
+	
+	                    case 'top left':
+	                        var x = 0,
+	                            y = 0;
+	                        break;
+	
+	                    case 'top right':
+	                        var x = divw - imgw,
+	                            y = 0;
+	                        break;
+	
+	                    case 'bottom left':
+	                        var x = 0,
+	                            y = divh - imgh;
+	                        break;
+	
+	                    case 'bottom right':
+	                        var x = divw - imgw,
+	                            y = divh - imgh;
+	                        break;
+	
+	                    default:
+	                        var new_position = position.split(" "),
+	                            x = -(new_position[0]),
+	                            y = -(new_position[1]);
+	
+	                        if (y < (divh - imgh)) {
+	                            y = divh - imgh
+	                        } else {
+	                            if (y > 0) y = 0
+	                        }
+	
+	                        if (x < (divw - imgw)) {
+	                            x = divw - imgw
+	                        } else {
+	                            if (x > 0) x = 0
+	                        }
                     }
 
-                    content.css({
-                        top: y + 'px',
-                        left: x + 'px'
-                    });
+                    content.css({ 'top': y+'px', 'left': x+'px' });
                 },
 
                 preloader: function() {
@@ -175,12 +172,14 @@
 
                 zoom: function(direction, w, start) {
                     var map_width = $('#map-bg').width(),
+                    	map_height = $('#map-bg').height(),
                         max = (zoom >= sets.zoom.max && direction == 'in'),
                         min = (zoom <= sets.zoom.min && direction == 'out'),
                         zoom_in = $(sets.zoomInButton),
                         zoom_out = $(sets.zoomOutButton),
                         currW = $('#map-bg').width(),
                         currH = $('#map-bg').height();
+
 
                     if (min) {
                         zoom_out.addClass('disabled');
@@ -195,25 +194,25 @@
                     if (direction == 'in') {
                         zoom += sets.zoom.increment;
                         zoom_out.removeClass('disabled');
-
                         $('#map-bg').width(Math.round(map_width += (map_width * sets.zoom.increment)));
                         $('#map-bg').height(Math.round(map_width * y_ratio));
 
-                        if (zoom >= sets.zoom.max) {
+                        if (zoom >= sets.zoom.max)
                             zoom_in.addClass('disabled');
-                        }
+                        
+                        content.css({ 'top': '0px', 'left': '0px' }); 
                     }
 
                     if (direction == 'out') {
                         zoom -= sets.zoom.increment;
                         zoom_in.removeClass('disabled');
-
                         $('#map-bg').width(map_width -= (map_width * sets.zoom.increment));
                         $('#map-bg').height(map_width * y_ratio);
 
-                        if (zoom <= sets.zoom.min) {
+                        if (zoom <= sets.zoom.min)
                             zoom_out.addClass('disabled');
-                        }
+
+                        content.css({ 'top': '0px', 'left': '0px' }); 
                     }
 
                     if (w != '' && typeof w != 'undefined') {
@@ -444,6 +443,10 @@
                                             $('.counter span').text(current);
                                         }
                                     }, 4000);
+                                    
+                                $slide.find('.close').bind('click', function() {
+                                	clearInterval(autoRotate);
+                                });
 
                                 $('#ssp-i img:first-child').show().addClass('first');
 

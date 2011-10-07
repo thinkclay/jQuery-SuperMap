@@ -49,12 +49,16 @@
 
             var map = {
                 check: function(x, y) {
-                    if (y < (divh - $('#map-bg').height())) y = divh - $('#map-bg').height();
-                    else if (y > 0) y = 0;
+                    if (y < (divh - $('#map-bg').height())) 
+                    	y = divh - $('#map-bg').height();
+                    else if (y > 0) 
+                    	y = 0;
 
-                    if (x < (divw - $('#map-bg').width())) x = divw - $('#map-bg').width();
-                    else if (x > 0) x = 0;
-
+                    if (x < (divw - $('#map-bg').width())) 
+                    	x = divw - $('#map-bg').width();
+                    else if (x > 0) 
+                    	x = 0;
+					
                     return {
                         x: x,
                         y: y
@@ -66,53 +70,50 @@
                     map.zoom(null, (imgw * sets.zoom.start), true);
 
                     switch (position) {
-                    case 'center':
-                        var x = (divw - $('#map-bg')) / 2,
-                            y = (divh - $('#map-bg')) / 2;
-                        break;
-
-                    case 'top left':
-                        var x = 0,
-                            y = 0;
-                        break;
-
-                    case 'top right':
-                        var x = divw - imgw,
-                            y = 0;
-                        break;
-
-                    case 'bottom left':
-                        var x = 0,
-                            y = divh - imgh;
-                        break;
-
-                    case 'bottom right':
-                        var x = divw - imgw,
-                            y = divh - imgh;
-                        break;
-
-                    default:
-                        var new_position = position.split(" "),
-                            x = -(new_position[0]),
-                            y = -(new_position[1]);
-
-                        if (y < (divh - imgh)) {
-                            y = divh - imgh
-                        } else {
-                            if (y > 0) y = 0
-                        }
-
-                        if (x < (divw - imgw)) {
-                            x = divw - imgw
-                        } else {
-                            if (x > 0) x = 0
-                        }
+	                    case 'center':
+	                        var x = (divw - $('#map-bg').width()) / 2,
+	                            y = (divh - $('#map-bg').height()) / 2;
+	                        break;
+	
+	                    case 'top left':
+	                        var x = 0,
+	                            y = 0;
+	                        break;
+	
+	                    case 'top right':
+	                        var x = divw - imgw,
+	                            y = 0;
+	                        break;
+	
+	                    case 'bottom left':
+	                        var x = 0,
+	                            y = divh - imgh;
+	                        break;
+	
+	                    case 'bottom right':
+	                        var x = divw - imgw,
+	                            y = divh - imgh;
+	                        break;
+	
+	                    default:
+	                        var new_position = position.split(" "),
+	                            x = -(new_position[0]),
+	                            y = -(new_position[1]);
+	
+	                        if (y < (divh - imgh)) {
+	                            y = divh - imgh
+	                        } else {
+	                            if (y > 0) y = 0
+	                        }
+	
+	                        if (x < (divw - imgw)) {
+	                            x = divw - imgw
+	                        } else {
+	                            if (x > 0) x = 0
+	                        }
                     }
 
-                    content.css({
-                        'top': y + 'px',
-                        'left': x + 'px'
-                    });
+                    content.css({ 'top': y+'px', 'left': x+'px' });
                 },
 
                 preloader: function() {
@@ -176,8 +177,8 @@
                 },
 
                 zoom: function(direction, w, start) {
-
                     var map_width = $('#map-bg').width(),
+                    	map_height = $('#map-bg').height(),
                         max = (zoom >= sets.zoom.max && direction == 'in'),
                         min = (zoom <= sets.zoom.min && direction == 'out'),
                         zoom_in = $(sets.zoomInButton),
@@ -202,9 +203,10 @@
                         $('#map-bg').width(Math.round(map_width += (map_width * sets.zoom.increment)));
                         $('#map-bg').height(Math.round(map_width * y_ratio));
 
-                        if (zoom >= sets.zoom.max) {
+                        if (zoom >= sets.zoom.max)
                             zoom_in.addClass('disabled');
-                        }
+                        
+                        content.css({ 'top': '0px', 'left': '0px' }); 
                     }
 
                     if (direction == 'out') {
@@ -213,9 +215,10 @@
                         $('#map-bg').width(map_width -= (map_width * sets.zoom.increment));
                         $('#map-bg').height(map_width * y_ratio);
 
-                        if (zoom <= sets.zoom.min) {
+                        if (zoom <= sets.zoom.min)
                             zoom_out.addClass('disabled');
-                        }
+
+                        content.css({ 'top': '0px', 'left': '0px' }); 
                     }
 
                     if (w != '' && typeof w != 'undefined') {
@@ -231,8 +234,6 @@
                     ratioHeight = currH / $('#map-bg').height();
 
                     map.plot(direction, start);
-
-
                 },
 
                 plot: function(direction, start) {
@@ -286,6 +287,7 @@
                     });
                 }
             }; // end: map
+            
             content.bind({
                 mousedown: function(e) {
                     e.preventDefault();
@@ -340,11 +342,9 @@
                 },
 
                 click: function() {
-
                     slide = true;
 
                     if (mouseMove) return false;
-
 
                     var $this = $(this),
                         pointw = $this.width(),
@@ -417,15 +417,14 @@
                                 url: $this.attr('data-image')
                             },
                             success: function(data) {
-                                
                                 path = data.gallery.album['@attributes'].lgPath;
 
                                 $slide.prepend('<div id="ssp-i" class="ssp"><div class="inner"></div></div>');
 
-                                //$('body').append('<div id="test" style="width: 500px;"></div>');
                                 for (i = 0; i < data.gallery.album.img.length; i++) {
                                     $('#ssp-i .inner').append('<img src="' + path + data.gallery.album.img[i]['@attributes'].src + '" />');
                                 }
+
 
                                 /**
                                  * Start rotating through the images by:
@@ -436,7 +435,6 @@
                                  * 4: display next image
                                  * 5: allow override by next / prev
                                  */
-
                                 var current = 1,
                                     total = $('#ssp-i img').length,
                                     $sspInner = $('#ssp-i .inner'),
@@ -445,6 +443,7 @@
                                     $controlPause = $('<a class="ssp-pause"><img src="img/ui/ssp-pause.png"></a>'),
                                     $controlPlay = $('<a class="ssp-play"><img src="img/ui/ssp-play.png"></a>'),
                                     autoRotate = setInterval(function() {
+                                    	console.log('current: '+current);
                                         $sspInner.find('img:visible').hide().next('img').fadeIn().end().appendTo($sspInner);
 
                                         if (current < total) {
@@ -457,9 +456,15 @@
                                         }
                                     }, 4000);
                                     
+                                $slide.find('.close').bind('click', function() {
+                                	clearInterval(autoRotate);
+                                });
+                                    
                                 $('#ssp-i img:first-child').show().addClass('first');
 
-                                $('#ssp-i').append($controlPlay, $controlPause, $controlNext, $controlPrev).append('<div class="counter"><span>' + current + '</span> / ' + total + '</div>');
+                                $('#ssp-i')
+                                	.append($controlPlay, $controlPause, $controlNext, $controlPrev)
+                                	.append('<div class="counter"><span>' + current + '</span> / ' + total + '</div>');
 
                                 $controlPause.bind('click', function(e) {
                                     clearInterval(autoRotate);
@@ -611,10 +616,10 @@
                 
                 $('.point').removeClass('selected');
 
-                $('#test').empty();
                 $(this).parent().empty().remove();
 
-                if (typeof autoRotate != 'undefined') clearInterval(autoRotate);
+                if (typeof autoRotate != 'undefined') 
+                	clearInterval(autoRotate);
 
                 setTimeout(function() {
                     sets.onPopupClose.call(this)
@@ -652,6 +657,7 @@
                 });
             }
         }); // end: each
+        
         /**
          * Map Key open/close functionality
          */
