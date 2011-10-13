@@ -366,7 +366,7 @@
                     }
 
                     $('.bubble, .bubble-select').remove();
-                    $("." + sets.popupClass).remove();
+                    $('.'+sets.popupClass).remove();
 
                     if ($this.attr('data-multiple')) {
                         slide = false;

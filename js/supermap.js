@@ -341,8 +341,9 @@
                 },
 
                 click: function() {
+                
                     slide = true;
-
+                    
                     if (mouseMove) 
                     	return false;
 
@@ -373,7 +374,7 @@
                         $('.bubblePerm').fadeOut().remove();
                     });
 
-                    $("." + sets.popupClass).remove();
+                    $('.'+sets.popupClass).remove();
 
                     if ($this.attr('data-multiple')) {
                         slide = false;
@@ -381,7 +382,7 @@
 
                         html = '<h1>Click to view more</h1>';
                         for (i = 0; i < id.length; i++) {
-                            html += '<a href="' + id[i] + '" onclick="return false;">' + $(id[i]).find('h1').text() + '</a>';
+                            html += '<a href="'+id[i]+'">'+$(id[i]).find('h1').text()+'</a>';
                         }
 
                         $this.after($("<div />").addClass('bubble-select').html(html).append($("<a />").addClass("close")));
@@ -400,10 +401,10 @@
                             position: "absolute",
                             zIndex: "3"
                         });
-                    }
-
+                    } 
+                    
                     if (slide !== false) {
-                    		$('#map_zoom').css({'z-index':'3'});
+                    	$('#map_zoom').css({'z-index':'3'});
                         $slide = $("<div />").addClass(sets.popupClass).html(wrap).append($('<a class="close"><img src="img/ui/dropdown-close-lg.png"></a>'));
                         $('.map').prepend($slide);
                         $slide.slideDown();
@@ -632,15 +633,21 @@
                 $(sets.outsideButtons).live('click', function() {
                     mouseMove = false;
 
-                    if (typeof autoRotate != 'undefined') clearInterval(autoRotate);
+                    if (typeof autoRotate != 'undefined') 
+                    	clearInterval(autoRotate);
 
                     var $this = $(this),
                         id = $this.attr("href");
 
-                    if (id == '#') return false;
+					id = id.replace(/(http|https|www)\S+(?=#)/, ''); // Bug fix for IE7 which contains full url
+					
+					alert(id);
 
-                    $(id).click();
-
+                    if (id == '#') 
+                    	return false;
+									
+                    $(id).click(); 
+                    
                     return false;
                 })
             }
@@ -656,6 +663,7 @@
                     return false;
                 });
             }
+            
         }); // end: each
         
         /**

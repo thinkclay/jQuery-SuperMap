@@ -67,7 +67,7 @@ endif;
 	
 	<script src="js/supermap.js" type="text/javascript"></script>
 	<script src="js/init.js" type="text/javascript"></script>
-	
+	<?php /*
 	<!--[if lt IE 9 ]>
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -79,6 +79,7 @@ endif;
 			});
 		</script>
 	<!--<![endif]-->
+	*/ ?>
 <?php endif; ?>
 </head>
 
@@ -207,9 +208,6 @@ endif;
 				<h1>Field of Dreams</h1>
 				<div class="description">
 				<div class="inner">
-					<p>The Fields of Dreams are comprised of four state-of-the-art turf fields and fenced dugouts, all of which are professionally lit for night-time play (the same lighting you'll find at Citi Field). The 40,000 square foot complex also includes giant "water cannons" that are used to "blast" campers  on hot days with gushing water. The fields are also used for Coleman Country's famous tennis-baseball and kickball and are lined for soccer and for Wiffleball. The real stadium seating completes the authentic experience. There's lots of action well after the sun goes down, when different grades are scheduled for extended camp days.</p>
-					<p>The Fields of Dreams are comprised of four state-of-the-art turf fields and fenced dugouts, all of which are professionally lit for night-time play (the same lighting you'll find at Citi Field). The 40,000 square foot complex also includes giant "water cannons" that are used to "blast" campers  on hot days with gushing water. The fields are also used for Coleman Country's famous tennis-baseball and kickball and are lined for soccer and for Wiffleball. The real stadium seating completes the authentic experience. There's lots of action well after the sun goes down, when different grades are scheduled for extended camp days.</p>
-					<p>The Fields of Dreams are comprised of four state-of-the-art turf fields and fenced dugouts, all of which are professionally lit for night-time play (the same lighting you'll find at Citi Field). The 40,000 square foot complex also includes giant "water cannons" that are used to "blast" campers  on hot days with gushing water. The fields are also used for Coleman Country's famous tennis-baseball and kickball and are lined for soccer and for Wiffleball. The real stadium seating completes the authentic experience. There's lots of action well after the sun goes down, when different grades are scheduled for extended camp days.</p>
 					<p>The Fields of Dreams are comprised of four state-of-the-art turf fields and fenced dugouts, all of which are professionally lit for night-time play (the same lighting you'll find at Citi Field). The 40,000 square foot complex also includes giant "water cannons" that are used to "blast" campers  on hot days with gushing water. The fields are also used for Coleman Country's famous tennis-baseball and kickball and are lined for soccer and for Wiffleball. The real stadium seating completes the authentic experience. There's lots of action well after the sun goes down, when different grades are scheduled for extended camp days.</p>
 				</div>
 				</div>
@@ -501,16 +499,16 @@ endif;
 				<h1>Basketball Courts</h1>
 				<div class="description">
 				<div class="inner">
-					<p>Hoops are a favorite at Coleman Country, and our courts feature adjustable baskets and varying court lengths to fit the age and size of the campers playing there. "Hoop-lah" is our covered basketball court, created expressly for our younger campers to hone their skills. Rain or shine, campers will find the perfect spot from which to dribble or shoot.</p>
+					<p>Hoops are a favorite at Coleman Country, and our courts feature adjustable baskets and varying court lengths to fit the age and size of the campers playing there.</p>
 				</div>
 				</div>
 			</div>
-			<div class="point activity" id="basketball2" rel="p-208-149" data-type="image" data-image="http://content.colemancountry.com/ssp/images.php?album=28&w=575&h=323&s=0&q=80&sh=1&tw=100&th=100&ts=0&tlw=16&tlh=16&tq=60&tsh=1&pw=54&ph=40&aps=0">
-				<h1>Basketball Courts</h1>
+			<div class="point activity" id="basketball2" rel="p-208-149" data-type="image" data-image="http://content.colemancountry.com/ssp/images.php?album=78&w=575&h=323&s=0&q=80&sh=1&tw=100&th=100&ts=0&tlw=16&tlh=16&tq=60&tsh=1&pw=54&ph=40&aps=0">
+				<h1>"Hoop-lah" Basketball Courts</h1>
 
 				<div class="description">
 				<div class="inner">
-					<p>Hoops are a favorite at Coleman Country, and our courts feature adjustable baskets and varying court lengths to fit the age and size of the campers playing there. "Hoop-lah" is our covered basketball court, created expressly for our younger campers to hone their skills. Rain or shine, campers will find the perfect spot from which to dribble or shoot.</p>
+					<p>"Hoop-lah" is our covered basketball court, created expressly for our younger campers to hone their skills. Rain or shine, campers will find the perfect spot from which to dribble or shoot.</p>
 				</div>
 				</div>
 			</div>
@@ -655,7 +653,7 @@ endif;
 		-->
 		<ul id="map_zoom">
 			<li><a href="#" id="zoom_in"><img src="img/ui/<?php if ($mobile=='1'): ?>zoom-in-circle.png<?php else: ?>zoom-in-tab.png<?php endif; ?>" alt="Zoom In" border="0" /></a></li>
-			<li><a href="#" id="zoom_out"><img src="img/ui/<?php if ($mobile=='1'): ?>zoom-out-circle.png<?php else: ?>zoom-out-tab.png<?php endif; ?>" alt="Zoom Out" border="0" /></a></li>
+			<li><a href="#" id="zoom_out" class="disabled"><img src="img/ui/<?php if ($mobile=='1'): ?>zoom-out-circle.png<?php else: ?>zoom-out-tab.png<?php endif; ?>" alt="Zoom Out" border="0" /></a></li>
 		</ul>
 		
 	</div><!-- eof: #content -->
