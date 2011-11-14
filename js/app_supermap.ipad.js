@@ -29,13 +29,13 @@
                 cursor: 'move'
             });
             $this.wrapInner($('<div />').addClass('imgContent').css({
-                zIndex: '1',
-                position: 'absolute'
+                zIndex: "1",
+                position: "absolute"
             }));
 
-            var content = $('.imgContent'),
+            var content = $(".imgContent"),
                 image = $('#map-bg'),
-                point = $this.find('.' + sets.markerClass),
+                point = $this.find("." + sets.markerClass),
                 mouseDown = false,
                 mouseMove = false,
                 mouseCoordinates = false,
@@ -51,7 +51,7 @@
             var map = {
                 check: function(x, y) {
                     if (y < (divh - $('#map-bg').height())) y = divh - $('#map-bg').height();
-                    else if (y > 0) y = 0
+                    else if (y > 0) y = 0;
 
                     if (x < (divw - $('#map-bg').width())) x = divw - $('#map-bg').width();
                     else if (x > 0) x = 0;
@@ -240,19 +240,21 @@
                                 x = (pos[1] * 2 * (sets.zoom.start / defaults.zoom.start)),
                                 y = (pos[2] * 2 * (sets.zoom.start / defaults.zoom.start));
 
+
                             $this.wrapInner($('<div />').addClass('markerContent').css({
                                 display: 'none'
                             }));
 
                             if ($this.attr('data-type') == 'image') {
-                                prepend = '<img src="img/map/' + sets.prefix + $this.attr('id') + '.png" alt="' + $this.attr('id') + '" />';
+                                prepend = '<img src="img/map/' + sets.prefix + $this.attr('id') + '.png" />';
                                 $this.prepend(prepend);
                             }
 
                             $this.height(Math.round($this.height() / ratioHeight)).width(Math.round($this.width() / ratioWidth));
                             $this.children('img').width($this.width());
                         } else {
-                            x = $this.position().left, y = $this.position().top;
+                            var x = $this.position().left,
+                                y = $this.position().top;
 
                             if (direction == 'in') {
                                 y = Math.round(y / ratioHeight);
@@ -282,7 +284,6 @@
                     });
                 }
             }; // end: map
-
             document.ontouchstart = function(e) {
                 if (e.touches.length == 1) { // Only deal with one finger
                     var touch = e.touches[0]; // Get the information for finger #1
@@ -323,25 +324,28 @@
                         pointh = $this.height(),
                         pos = $this.position(),
                         popup = $('.bubble'),
-                        popupw = popup.innerWidth(),
-                        popuph = popup.innerHeight(),
                         py = pos.top,
                         px = pos.left;
 
                     popup.remove();
 
                     $this.append($("<div />").addClass('bubble'));
-
                     $('.bubble').html($this.find('h1').text()).css({
                         position: 'absolute',
-                        zIndex: '5',
+                        zIndex: '5'
                     }).fadeIn('slow');
+                },
+
+                mouseout: function() {
+                    $('.bubble').fadeOut();
                 },
 
                 click: function() {
                     slide = true;
 
                     if (mouseMove) return false;
+
+                    if (typeof autoRotate != 'undefined') clearInterval(autoRotate);
 
                     var $this = $(this),
                         pointw = $this.width(),
@@ -366,6 +370,7 @@
                     }
 
                     $('.bubble, .bubble-select').remove();
+
                     $("." + sets.popupClass).remove();
 
                     if ($this.attr('data-multiple')) {
@@ -404,6 +409,7 @@
                     if ($this.attr('data-image')) {
                         $.ajax({
                             url: 'ssp.php',
+                            // Brian 0824: relative path if not at domain root level
                             dataType: 'json',
                             data: {
                                 url: $this.attr('data-image')
@@ -431,8 +437,8 @@
                                     $sspInner = $('#ssp-i .inner'),
                                     $controlNext = $('<a class="ssp-control next" />'),
                                     $controlPrev = $('<a class="ssp-control prev" />'),
-                                    $controlPause = $('<a class="ssp-pause" />'),
-                                    $controlPlay = $('<a class="ssp-play" />'),
+                                    $controlPause = $('<a class="ssp-pause"><img src="img/ui/ssp-pause.png"></a>'),
+                                    $controlPlay = $('<a class="ssp-play"><img src="img/ui/ssp-play.png"></a>'),
                                     autoRotate = setInterval(function() {
                                         $sspInner.find('img:visible').hide().next('img').fadeIn().end().appendTo($sspInner);
 
@@ -519,16 +525,13 @@
                                     $sspInner.find('img:last-child').prependTo($sspInner).fadeIn();
                                     return false;
                                 });
-                            },
-                            error: function() {
-                                alert('You must have an internet connection to view slideshows and/or videos.');
                             }
                         });
                     }
 
                     if ($this.attr('data-video')) {
                         $slide.prepend('<div id="ssp-v" class="ssp"></div>');
-                        $('#ssp-v').append('<video controls><source src="' + $(this).attr('data-video') + '.webm" type=\'video/webm; codecs="vp8, vorbis"\'><source src="' + $(this).attr('data-video') + '.ogv" type=\'video/ogg; codecs="theora, vorbis"\'><source src="' + $(this).attr('data-video') + '_mobile.mp4" type=\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\'><object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab"><param name="src" value="' + $(this).attr('data-video') + '_mobile.mp4"><param name="auto play" value="true"><param name="type" value="video/quicktime"><embed src="' + $(this).attr('data-video') + '_mobile.mp4 <view-source:' + $(this).attr('data-video') + '.mp4> "  autoplay="true" type="video/quicktime" pluginspage="http://www.apple.com/quicktime/download/"></object></video>');
+                        $('#ssp-v').append('<video id="video" controls><source src="' + $(this).attr('data-video') + '.webm" type=\'video/webm; codecs="vp8, vorbis"\'><source src="' + $(this).attr('data-video') + '.ogv" type=\'video/ogg; codecs="theora, vorbis"\'><source src="' + $(this).attr('data-video') + '_mobile.mp4" type=\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\'><object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab"><param name="src" value="' + $(this).attr('data-video') + '_mobile.mp4"><param name="auto play" value="true"><param name="type" value="video/quicktime"><embed src="' + $(this).attr('data-video') + '_mobile.mp4 <view-source:' + $(this).attr('data-video') + '.mp4> "  autoplay="true" type="video/quicktime" pluginspage="http://www.apple.com/quicktime/download/"></object></video>');
                     }
 
                     if ($this.attr('data-image') && $this.attr('data-video')) {
@@ -538,20 +541,8 @@
                         $slide.append('<a class="view-ssp-i selected" rel="#ssp-i"><img src="img/ui/view-slideshow.png" alt="View Slideshow" border="0" /></a>');
                         $slide.append('<a class="view-ssp-v" rel="#ssp-v"><img src="img/ui/play-video.png" alt="Play Video" border="0" /></a>');
 
-/*
-$('.slide .view-ssp-i').live('click', function () {
-
-id = $(this).attr('rel');
-$('.view-ssp-i, .view-ssp-v').removeClass('selected');
-$(this).addClass('selected');
-$('.ssp').hide();
-$(id).fadeIn();
-$('#ssp-v video').get(0).pause();
-return false;
-
-});
-*/
                         $('.slide .view-ssp-i').live('touchstart', function() {
+
                             id = $(this).attr('rel');
                             $('.view-ssp-i, .view-ssp-v').removeClass('selected');
                             $(this).addClass('selected');
@@ -559,11 +550,14 @@ return false;
                             $(id).fadeIn();
                             $('#ssp-v video').get(0).pause();
                             return false;
+                            
+                            var norefresh = 'false';
+                            console.log(norefresh);
 
                         });
 
                         $('.slide .view-ssp-v').live('touchstart', function() {
-                        
+
                             id = $(this).attr('rel');
                             $('.view-ssp-i, .view-ssp-v').removeClass('selected');
                             $(this).addClass('selected');
@@ -571,24 +565,28 @@ return false;
                             $(id).fadeIn();
                             $('#ssp-v video').get(0).play();
                             return false;
+                            
+                            var norefresh = 'true';
+                            console.log(norefresh);
 
                         });
                     }
 
                     if ($('.description .inner').height() > $('.description').height()) {
-                        $slide.append('<a class="read-more"><img src="img/ui/text-scroll-down.png"></a><a class="read-less"><img src="img/ui/text-scroll-up.png"></a>');
+                        $slide.prepend('<a class="read-less"><img src="img/ui/text-scroll-up.png"></a>');
+                        $slide.append('<a class="read-more"><img src="img/ui/text-scroll-down.png"></a>');
                     }
 
                     // You can change the scroll amount here, as well as the event that triggers scrolling
                     $('.read-more').live('touchstart', function() {
                         scroll = $('.description').scrollTop();
-                        $('.description').scrollTop(scroll += 40);
+                        $('.description').scrollTop(scroll += 100);
                         return false;
                     });
 
                     $('.read-less').live('touchstart', function() {
                         scroll = $('.description').scrollTop();
-                        $('.description').scrollTop(scroll -= 40);
+                        $('.description').scrollTop(scroll -= 100);
                         return false;
                     });
 
@@ -606,12 +604,10 @@ return false;
                         }).fadeIn('slow');
                     });
 
-
                     sets.onMarkerClick.call(this);
 
-                    return false;
-
-                } // end: click binding
+                    return false
+                }
             });
 
             $this.find(".close").live('click', function() {
@@ -628,6 +624,11 @@ return false;
             if (sets.outsideButtons) {
                 $(sets.outsideButtons).live('click', function() {
                     mouseMove = false;
+
+                    $('ul.map_buttons').animate({
+                        'bottom': '-400px'
+                    });
+                    if (typeof autoRotate != 'undefined') clearInterval(autoRotate);
 
                     var $this = $(this),
                         id = $this.attr("href");
@@ -652,16 +653,30 @@ return false;
                 });
             }
         }); // end: each
-        /**
-         * Map Key open/close functionality
-         */
 
         function mapKeyGo() {
-            $('.map_buttons').change(function() {
-                id = $(this).val();
-                $(id).click()
+            $('.keyBtn a').bind('touchstart', function(e) {
+                //$('.keyBtn a').click(function(){
+                if ($(this).attr('class') == 'keyOpenBtn') {
+                    $('ul.map_buttons li.keyBtn a.keyOpenBtn').hide();
+                    $('ul.map_buttons li.keyBtn a.keyCloseBtn').show();
+                    $('.slide').hide();
+                    $('.bubble-select').remove();
+                    $('ul.map_buttons').animate({
+                        'bottom': '0px'
+                    });
+                }
+                else {
+                    $('ul.map_buttons li.keyBtn a.keyOpenBtn').show();
+                    $('ul.map_buttons li.keyBtn a.keyCloseBtn').hide();
+                    $('ul.map_buttons').animate({
+                        'bottom': '-400px'
+                    });
+                }
             });
         }
+        
+        
 
     } // end: class
 }(jQuery));

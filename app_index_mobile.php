@@ -1,24 +1,14 @@
-<?php 
-if(strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'],'iPod') || strstr($_SERVER['HTTP_USER_AGENT'],'iPad') || strstr($_SERVER['HTTP_USER_AGENT'],'Android')):
-	$mobile = '1';
-else: 
-	$mobile = '0';
-endif;
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Coleman Country Day Camp Interactive Map</title>
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+	<script src="js/jquery.js" type="text/javascript"></script>
 	<link href="css/reset.css" rel="stylesheet" type="text/css" />
-	
-<?php if ($mobile=='1'): ?>
  	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	
-	<?php if (strpos($_SERVER['HTTP_USER_AGENT'], 'iPad')): ?>
-	<link href="css/default.ipad.css" rel="stylesheet" type="text/css" />
+	<link href="css/app_default.mobile.css" rel="stylesheet" type="text/css" />
 	<link href="css/points.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 	$(document).ready( function () {
@@ -41,6 +31,7 @@ endif;
 				window.location = window.location.href+'?v='+Math.floor(Math.random()*1000);
 			} else {
 				if(video.webkitDisplayingFullscreen != true){
+					$('#content').height($(window).height()).width($(window).width());
 					window.location = window.location.href+'?v='+Math.floor(Math.random()*1000);
 				}
 			}	
@@ -48,70 +39,8 @@ endif;
 		
 	});
 	</script>
-	<script src="js/supermap.ipad.js" type="text/javascript"></script>
-	<script src="js/init.ipad.js" type="text/javascript"></script>
-	
-	<?php else: ?>
-	<link href="css/default.mobile.css" rel="stylesheet" type="text/css" />
-	<link href="css/points.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript">
-	$(document).ready( function () {
-		
-		//Trigger page reload when orientation changes, but not when video is in full screen mode
-	
-		$('#content').height($(window).height()).width($(window).width());
-		var video = document.getElementsByTagName('video')[0];
-
-		$(window).resize(function() {
-			var video = document.getElementsByTagName('video')[0];
-			
-			video.addEventListener('webkitendfullscreen', function(){
-				window.location = window.location.href+'?v='+Math.floor(Math.random()*1000);
-			});
-			
-			if(!video) {
-				window.location = window.location.href+'?v='+Math.floor(Math.random()*1000);
-			} else if ($('#ssp-i').is(":visible")){
-				window.location = window.location.href+'?v='+Math.floor(Math.random()*1000);
-			} else {
-				if(video.webkitDisplayingFullscreen != true){
-					window.location = window.location.href+'?v='+Math.floor(Math.random()*1000);
-				}
-			}	
-		});
-		
-	});
-	</script>
-	<script src="js/supermap.mobile.js" type="text/javascript"></script>
-	<script src="js/init.mobile.js" type="text/javascript"></script>
-	<?php endif; ?>
-
-<?php else: ?>	
-	<link href="css/default.css" rel="stylesheet" type="text/css" />
-	<link href="css/points.css" rel="stylesheet" type="text/css" />
-	<!--[if IE 7 ]>
-		<style type="text/css">
-			.map {z-index:4;}
-		</style>
-	<!--<![endif]-->
-	
-	
-	<script src="js/supermap.js" type="text/javascript"></script>
-	<script src="js/init.js" type="text/javascript"></script>
-	<?php /*
-	<!--[if lt IE 9 ]>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$('.point').each(function(){
-					var pointTitle = $('h1', this).text();
-					$(this).attr('title',pointTitle);
-				});
-				$('.bubble').css({'display':'none'});
-			});
-		</script>
-	<!--<![endif]-->
-	*/ ?>
-<?php endif; ?>
+	<script src="js/app_supermap.mobile.js" type="text/javascript"></script>
+	<script src="js/app_init.mobile.js" type="text/javascript"></script>	
 </head>
 
 <body>
@@ -170,7 +99,7 @@ endif;
 				</div>
 			</div>
 			
-			<div class="point activity" id="gate-house" rel="p-116-258" data-type="image"<?php /* data-image="http://content.colemancountry.com/ssp/images.php?album=48&w=575&h=323&s=0&q=80&sh=1&tw=100&th=100&ts=0&tlw=16&tlh=16&tq=60&tsh=1&pw=54&ph=40&aps=0"*/ ?>>
+			<div class="point activity" id="gate-house" rel="p-116-258" data-type="image">
 				<div class="singleimg"><div class="inner"><img src="http://content.colemancountry.com/ssp/albums/album-48/lg/001_HowdyHouse.jpg" alt=""></div></div>
 				<h1>Howdy House <em>(gate house)</em></h1>
 				<div class="description">
@@ -371,7 +300,7 @@ endif;
 				</div>
 			</div>
 			
-			<div class="point activity" id="schoolhouse" rel="p-51-206" data-type="image"<?php /* data-image="http://content.colemancountry.com/ssp/images.php?album=50&w=575&h=323&s=0&q=80&sh=1&tw=100&th=100&ts=0&tlw=16&tlh=16&tq=60&tsh=1&pw=54&ph=40&aps=0"*/ ?>>
+			<div class="point activity" id="schoolhouse" rel="p-51-206" data-type="image">
 				<div class="singleimg"><div class="inner"><img src="http://content.colemancountry.com/ssp/albums/album-50/lg/001_LittleRedSchoolhouse.jpg" alt=""></div></div>
 				<h1>Little Red Schoolhouse</h1>
 				<div class="description">
@@ -399,7 +328,7 @@ endif;
 				</div>
 			</div>
 			
-			<div class="point activity" id="martial-arts" rel="p-42-85" data-type="image"<?php /* data-image="http://content.colemancountry.com/ssp/images.php?album=51&w=575&h=323&s=0&q=80&sh=1&tw=100&th=100&ts=0&tlw=16&tlh=16&tq=60&tsh=1&pw=54&ph=40&aps=0"*/ ?>>
+			<div class="point activity" id="martial-arts" rel="p-42-85" data-type="image">
 				<div class="singleimg"><div class="inner"><img src="http://content.colemancountry.com/ssp/albums/album-51/lg/001_MartialArts.jpg" alt=""></div></div>
 				<h1>Martial Arts</h1>
 				<div class="description">
@@ -674,7 +603,67 @@ endif;
 				Map Key
 			*************************
 		-->
-		<?php include 'includes/mapkey.php'; ?>
+		<select class="map_buttons">
+	<option selected="selected">MAP KEY</option>
+	<option value="#main-office">Town Hall</option>
+	<option value="#health-center">Wounded Knee</option>
+	<option value="#gate-house">Howdy House</option>
+	<option value="#mini-golf">Coleman Country Club</option>
+
+	<option value="#big-top">Big Top</option>
+	<option value="#tennis">Tennis Courts</option>
+	<option value="#playport">"Sol"arium</option>
+	<option value="#mega-mesa">Mega Mesa</option>
+	<option value="#railroad">Big Bob Railroad</option>
+	<option value="#field-dreams">Field of Dreams</option>
+
+	<option value="#coleman-yards">Coleman Yards</option>
+	<option value="#crafts">Grammy's Gallery</option>
+	<option value="#petting-zoo">Critter Corral</option>
+	<option value="#picnic-grove">Poppy's Pavilion</option>
+	<option value="#playground">Coleman Mine</option>
+	<option value="#dining-room">Chow Hall</option>
+
+	<option value="#gymnastics">Pike's Peak</option>
+	<option value="#theater">Palace Theater</option>
+	<option value="#sports-deck">Siegel's Sports Deck</option>
+	<option value="#woodworking">Sawmill</option>
+	<option value="#cabins">Pioneer Village Cabins</option>
+	<option value="#pioneer-station">Pioneer Station</option>
+
+	<option value="#cooking">Chuck Wagon &amp; BBQ Blvd</option>
+	<option value="#dance-hall">Mrs. G's Dance Hall</option>
+	<option value="#soccer-fields">The Coliseum</option>
+	<option value="#schoolhouse">Little Red Schoolhouse</option>
+	<option value="#computers">Boot Hill</option>
+
+	<option value="#bus-yard">Bus Yard</option>
+	<option value="#hockey">Rubin's Rink</option>
+	<option value="#street-games">Street Games</option>
+	<option value="#grand-playhouse">Grand Playhouse</option>
+	<option value="#challenge-course">Challenge Course</option>
+	<option value="#martial-arts">Martial Arts</option>
+
+	<option value="#trails">Maverick's Meander</option>
+	<option value="#horseback-riding">OK Corral</option>
+	<option value="#storyteloptionng">Tipi</option>
+	<option value="#boating">Hampton's Pond</option>
+	<option value="#zipoptionne">Zippity Do-Dah</option>
+	<option value="#archery">Bull's Eye Ridge</option>
+
+	<option value="#music">Grand Ol' Music</option>
+	<option value="#gaga-complex">Dream Dome</option>
+	<option value="#water-park">Bumper Boats/Sand &amp; Water Park</option>
+	<option value="#ping-pong">Pam Pong</option>
+	<option value="#yoga">"Om" on the Range</option>
+
+	<option value="#junior-soccer">Landsman's Landing</option>
+	<option value="#pool-locker-rooms">Pool Locker Rooms</option>
+	<option value="#pools">Scherr's Swimmin' Holes</option>
+	<option value="#basketball">Basketball Courts</option>
+	<option value="#volleyball">Volleyball Courts</option>
+	<option value="#water-misters">Spitzer's Spritzer</option>
+</select>
 		
 		
 		<!--
@@ -683,8 +672,8 @@ endif;
 			*************************
 		-->
 		<ul id="map_zoom">
-			<li><a href="#" id="zoom_in"><img src="img/ui/<?php if ($mobile=='1'): ?>zoom-in-circle.png<?php else: ?>zoom-in-tab.png<?php endif; ?>" alt="Zoom In" border="0" /></a></li>
-			<li><a href="#" id="zoom_out" class="disabled"><img src="img/ui/<?php if ($mobile=='1'): ?>zoom-out-circle.png<?php else: ?>zoom-out-tab.png<?php endif; ?>" alt="Zoom Out" border="0" /></a></li>
+			<li><a href="#" id="zoom_in"><img src="img/ui/zoom-in-circle.png" alt="Zoom In" border="0" /></a></li>
+			<li><a href="#" id="zoom_out" class="disabled"><img src="img/ui/zoom-out-circle.png" alt="Zoom Out" border="0" /></a></li>
 		</ul>
 		
 	</div><!-- eof: #content -->
